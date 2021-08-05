@@ -13,6 +13,7 @@ passwords: etc
 	# airflow
 	vault kv get --field=fernet-key -format=json $(SECRET_PATH)/airflow | sed -e 's/\"//g' > etc/fernet-key
 	vault kv get --field=auth -format=json $(SECRET_PATH)/airflow | sed -e 's/\"//g' > etc/auth
+	vault kv get --field=secret-key -format=json $(SECRET_PATH)/airflow | sed -e 's/\"//g' > etc/secret-key
     
 apply:
 	kubectl apply -k .

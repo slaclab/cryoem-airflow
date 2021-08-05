@@ -5,7 +5,7 @@ ENV DEBIAN_FRONTEND noninteractive
 ENV TERM linux
 
 # Airflow
-ARG AIRFLOW_VERSION=1.10.9
+ARG AIRFLOW_VERSION=1.10.10
 ARG AIRFLOW_USER_HOME=/usr/local/airflow
 ARG AIRFLOW_DEPS=""
 ARG PYTHON_DEPS=""
@@ -51,6 +51,8 @@ RUN set -ex \
         pyOpenSSL \
         ndg-httpsclient \
         pyasn1 \
+        sqlalchemy==1.3.23 \
+        Flask-SQLAlchemy==2.4.4 \
         apache-airflow[crypto,celery,postgres,hive,jdbc,mysql,ssh${AIRFLOW_DEPS:+,}${AIRFLOW_DEPS}]==${AIRFLOW_VERSION} \
         'redis==3.2' \
         statsd \

@@ -24,6 +24,7 @@ DAGS_LOG_DIR=${DAGS_LOG_DIR:-"/usr/local/airflow/logs"}
 
 FERNET_KEY=$(echo ${FERNET_KEY%\\n:-$(python -c "from cryptography.fernet import Fernet; FERNET_KEY = Fernet.generate_key().decode(); print(FERNET_KEY)")} | tr -d '\n') 
 
+AIRFLOW_SECRET_KEY=${AIRFLOW_SECRET_KEY:-$(openssl rand -hex 30)}
 AIRFLOW_EXECUTOR=${EXECUTOR:-Celery}
 AIRFLOW_DEFAULT_QUEUE=${AIRFLOW_DEFAULT_QUEUE:-default}
 AIRFLOW_PARALLELISM=${AIRFLOW_PARALLELISM:-256}
@@ -39,6 +40,7 @@ AIRFLOW_MAX_THREADS=${AIRFLOW_MAX_THREADS:-256}
 echo "Modifying airflow.cfg..."
 sed -i "s|result_backend = .*\$|result_backend = db+postgresql://$POSTGRES_USER:${POSTGRES_PASSWORD%\\n}@$POSTGRES_SERVICE_HOST:$POSTGRES_SERVICE_PORT/$POSTGRES_DB|" $AIRFLOW_HOME/airflow.cfg
 sed -i "s|sql_alchemy_conn = .*\$|sql_alchemy_conn = postgresql+psycopg2://$POSTGRES_USER:${POSTGRES_PASSWORD%\\n}@$POSTGRES_SERVICE_HOST:$POSTGRES_SERVICE_PORT/$POSTGRES_DB|" $AIRFLOW_HOME/airflow.cfg
+sed -i "s|^secret_key = .*\$|secret_key = ${AIRFLOW_SECRET_KEY%\\n}|" $AIRFLOW_HOME/airflow.cfg
 sed -i "s|broker_url = .*\$|broker_url = redis://${REDIS_PREFIX}${REDIS_SERVICE_HOST}:${REDIS_SERVICE_PORT}/1|" $AIRFLOW_HOME/airflow.cfg
 sed -i "s|^default_queue = .*\$|default_queue = ${AIRFLOW_DEFAULT_QUEUE}|" $AIRFLOW_HOME/airflow.cfg
 sed -i "s|^parallelism = .*\$|parallelism = ${AIRFLOW_PARALLELISM}|" $AIRFLOW_HOME/airflow.cfg
@@ -109,7 +111,7 @@ then
 
 # spit out version and exit
 else
-  echo "Only Celery Excutor supported... exiting."
+  echo "Only Celery Executor supported... exiting."
   exec $CMD version
   exit
 fi
