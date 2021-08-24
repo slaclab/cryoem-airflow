@@ -101,8 +101,8 @@ then
 
   if [ "${AIRFLOW_MODE}" == "webserver" ]; then
     # init db
-    echo exec $CMD initdb
-    $CMD initdb
+    echo exec $CMD db init
+    $CMD db init
   #elif [ "${AIRFLOW_MODE}" == "scheduler" ]; then
   #  sleep 5
   fi

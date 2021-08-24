@@ -47,5 +47,5 @@ configMapGenerator:
 
 images:
 - name: slaclab/cryoem-airflow
-  newTag: '20210730.0'
+  newTag: '20210824.0'
  
