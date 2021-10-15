@@ -34,42 +34,6 @@ spec:
     requests:
       storage: 1Gi
 ---
-kind: PersistentVolume
-apiVersion: v1
-metadata:
-  name: cryoem-daq-dev--sdf-dags
-  labels:
-    type: local
-spec:
-  storageClassName: cryoem-daq-dev--sdf-dags
-  capacity:
-    storage: 1Gi
-  accessModes:
-    - ReadWriteMany
-  local:
-    path: /lscratch/cryoem-daq--dev/airflow/dags
-  nodeAffinity:
-    required:
-      nodeSelectorTerms:
-      - matchExpressions:
-        - key: storage/sdf
-          operator: In
-          values:
-          - 'true'
----
-kind: PersistentVolumeClaim
-apiVersion: v1
-metadata:
-  name: cryoem-daq-dev--sdf-dags
-spec:
-  storageClassName: cryoem-daq-dev--sdf-dags
-  accessModes:
-    - "ReadWriteMany"
-  resources:
-    requests:
-      storage: 1Gi
-
----
 
 kind: PersistentVolume
 apiVersion: v1
@@ -110,43 +74,6 @@ spec:
 kind: PersistentVolume
 apiVersion: v1
 metadata:
-  name: cryoem-daq-dev--sdf-plugins
-  labels:
-    type: local
-spec:
-  storageClassName: cryoem-daq-dev--sdf-plugins
-  capacity:
-    storage: 1Gi
-  accessModes:
-    - ReadWriteMany
-  local:
-    path: /lscratch/cryoem-daq--dev/airflow/plugins
-  nodeAffinity:
-    required:
-      nodeSelectorTerms:
-      - matchExpressions:
-        - key: storage/sdf
-          operator: In
-          values:
-          - 'true'
----
-kind: PersistentVolumeClaim
-apiVersion: v1
-metadata:
-  name: cryoem-daq-dev--sdf-plugins
-spec:
-  storageClassName: cryoem-daq-dev--sdf-plugins
-  accessModes:
-    - "ReadWriteMany"
-  resources:
-    requests:
-      storage: 1Gi
-
----
-
-kind: PersistentVolume
-apiVersion: v1
-metadata:
   name: cryoem-daq-dev--logs
   labels:
     type: local
@@ -180,39 +107,3 @@ spec:
       storage: 1Gi
 
 ---
-
-kind: PersistentVolume
-apiVersion: v1
-metadata:
-  name: cryoem-daq-dev--sdf-logs
-  labels:
-    type: local
-spec:
-  storageClassName: cryoem-daq-dev--sdf-logs
-  capacity:
-    storage: 1Gi
-  accessModes:
-    - ReadWriteMany
-  local:
-    path: /lscratch/cryoem-daq--dev/airflow/logs
-  nodeAffinity:
-    required:
-      nodeSelectorTerms:
-      - matchExpressions:
-        - key: storage/sdf
-          operator: In
-          values:
-          - 'true'
----
-kind: PersistentVolumeClaim
-apiVersion: v1
-metadata:
-  name: cryoem-daq-dev--sdf-logs
-spec:
-  storageClassName: cryoem-daq-dev--sdf-logs
-  accessModes:
-    - "ReadWriteMany"
-  resources:
-    requests:
-      storage: 1Gi
-

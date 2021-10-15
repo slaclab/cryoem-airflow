@@ -16,55 +16,50 @@ spec:
         - name: airflow-logs
           mountPath: /usr/local/airflow/logs
         - name: exp
-          mountPath: /gpfs/slac/cryo/fs1/exp/
-        - name: sdf-exp
-          mountPath: /sdf/group/cryoem/exp/
+          mountPath: /lscratch/cryoem-daq--dev/cryoem/exp/
         - name: tem1
-          mountPath: /srv/cryoem/tem1
+          mountPath: /lscratch/cryoem-daq--dev/srv/cryoem/tem1
         - name: tem1-gainrefs
-          mountPath: /srv/cryoem/tem1-gainrefs
+          mountPath: /lscratch/cryoem-daq--dev/srv/cryoem/tem1-gainrefs
         - name: tem2
-          mountPath: /srv/cryoem/tem2
+          mountPath: /lscratch/cryoem-daq--dev/srv/cryoem/tem2
         - name: tem2-gainrefs
-          mountPath: /srv/cryoem/tem2-gainrefs
+          mountPath: /lscratch/cryoem-daq--dev/srv/cryoem/tem2-gainrefs
         - name: tem3
-          mountPath: /srv/cryoem/tem3
+          mountPath: /lscratch/cryoem-daq--dev/srv/cryoem/tem3
         - name: tem3-gainrefs
-          mountPath: /srv/cryoem/tem3-gainrefs
+          mountPath: /lscratch/cryoem-daq--dev/srv/cryoem/tem3-gainrefs
         - name: tem4
-          mountPath: /srv/cryoem/tem4
+          mountPath: /lscratch/cryoem-daq--dev/srv/cryoem/tem4
         - name: tem4-gainrefs
-          mountPath: /srv/cryoem/tem4-gainrefs
+          mountPath: /lscratch/cryoem-daq--dev/srv/cryoem/tem4-gainrefs
         - name: temalpha
-          mountPath: /srv/cryoem/temalpha
+          mountPath: /lscratch/cryoem-daq--dev/srv/cryoem/temalpha
         - name: temalpha-gainrefs
-          mountPath: /srv/cryoem/temalpha-gainrefs
+          mountPath: /lscratch/cryoem-daq--dev/srv/cryoem/temalpha-gainrefs
         - name: tembeta
-          mountPath: /srv/cryoem/tembeta
+          mountPath: /lscratch/cryoem-daq--dev/srv/cryoem/tembeta
         - name: tembeta-gainrefs
-          mountPath: /srv/cryoem/tembeta-gainrefs
+          mountPath: /lscratch/cryoem-daq--dev/srv/cryoem/tembeta-gainrefs
         - name: temgamma
-          mountPath: /srv/cryoem/temgamma
+          mountPath: /lscratch/cryoem-daq--dev/srv/cryoem/temgamma
         - name: temgamma-gainrefs
-          mountPath: /srv/cryoem/temgamma-gainrefs
+          mountPath: /lscratch/cryoem-daq--dev/srv/cryoem/temgamma-gainrefs
         - name: fib1
-          mountPath: /srv/cryoem/fib1
+          mountPath: /lscratch/cryoem-daq--dev/srv/cryoem/fib1
       volumes:
       - name: airflow-dags
         persistentVolumeClaim:
-          claimName: cryoem-daq-dev--sdf-dags
+          claimName: cryoem-daq-dev--dags
       - name: airflow-plugins
         persistentVolumeClaim:
-          claimName: cryoem-daq-dev--sdf-plugins
+          claimName: cryoem-daq-dev--plugins
       - name: airflow-logs
         persistentVolumeClaim:
-          claimName: cryoem-daq-dev--sdf-logs
+          claimName: cryoem-daq-dev--logs
       - name: exp
         persistentVolumeClaim:
           claimName: cryoem-daq-dev--exp
-      - name: sdf-exp
-        persistentVolumeClaim:
-          claimName: cryoem-daq-dev--sdf-exp
       - name: tem1
         persistentVolumeClaim:
           claimName: cryoem-daq-dev--tem1

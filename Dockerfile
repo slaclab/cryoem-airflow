@@ -5,7 +5,7 @@ ENV DEBIAN_FRONTEND noninteractive
 ENV TERM linux
 
 # Airflow
-ARG AIRFLOW_VERSION=2.1.3
+ARG AIRFLOW_VERSION=2.1.4
 ARG AIRFLOW_USER_HOME=/usr/local/airflow
 ARG AIRFLOW_DEPS=""
 ARG PYTHON_DEPS=""
@@ -54,10 +54,13 @@ RUN set -ex \
         sqlalchemy==1.3.23 \
         Flask-SQLAlchemy==2.4.4 \
         apache-airflow[crypto,celery,postgres,hive,jdbc,mysql,ssh${AIRFLOW_DEPS:+,}${AIRFLOW_DEPS}]==${AIRFLOW_VERSION} \
+        apache-airflow-upgrade-check \
         'redis==3.2' \
         statsd \
         influxdb \
         slackclient==1.3.2 \
+        apache-airflow-providers-slack \
+        airflow_multi_dagrun \
         paramiko \
         sshtunnel \
     && if [ -n "${PYTHON_DEPS}" ]; then pip install ${PYTHON_DEPS}; fi \

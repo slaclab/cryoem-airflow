@@ -36,44 +36,6 @@ spec:
       storage: 1Gi
 
 ---
-kind: PersistentVolume
-apiVersion: v1
-metadata:
-  name: cryoem-daq-dev--sdf-exp
-  labels:
-    type: local
-spec:
-  storageClassName: cryoem-daq-dev--sdf-exp
-  capacity:
-    storage: 20Gi
-  accessModes:
-    - ReadWriteMany
-  local:
-    path: /lscratch/cryoem-daq--dev/sdf/exp/
-  nodeAffinity:
-    required:
-      nodeSelectorTerms:
-      - matchExpressions:
-        #- key: kubernetes.io/hostname
-        - key: storage/sdf
-          operator: In
-          values:
-          - 'true'
----
-kind: PersistentVolumeClaim
-apiVersion: v1
-metadata:
-  name: cryoem-daq-dev--sdf-exp
-spec:
-  storageClassName: cryoem-daq-dev--sdf-exp
-  accessModes:
-    - "ReadWriteMany"
-  resources:
-    requests:
-      storage: 1Gi
-
-
----
 
 
 kind: PersistentVolume

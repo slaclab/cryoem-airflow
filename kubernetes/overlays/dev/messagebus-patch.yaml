@@ -48,7 +48,7 @@ spec:
     spec:
       accessModes:
       - ReadWriteOnce
-      storageClassName: cryoem-daq-dev--sdf-redis
+      storageClassName: cryoem-daq-dev--redis
       resources:
         requests:
           storage: 5Gi

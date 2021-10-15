@@ -9,10 +9,18 @@ spec:
       volumes:
       - name: airflow-dags
         persistentVolumeClaim:
-          claimName: cryoem-daq-dev--sdf-dags
+          claimName: cryoem-daq-dev--dags
       - name: airflow-plugins
         persistentVolumeClaim:
-          claimName: cryoem-daq-dev--sdf-plugins
+          claimName: cryoem-daq-dev--plugins
       - name: airflow-logs
         persistentVolumeClaim:
-          claimName: cryoem-daq-dev--sdf-logs
+          claimName: cryoem-daq-dev--logs
+      containers:
+      - name: scheduler
+        env:
+        - name: AIRFLOW_ADMIN_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: airflow-www
+              key: admin-password
