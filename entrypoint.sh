@@ -62,15 +62,6 @@ echo '=========='
 cat $AIRFLOW_HOME/airflow.cfg | grep -vE '(^\#|^$)'
 echo '=========='
 
-if [[ -z ${AIRFLOW_ADMIN_PASSWORD} ]] ; then
-    echo "Cannot create Airflow admin user, AIRFLOW_ADMIN_PASSWORD is not defined."
-    exit
-else
-    # create Airflow admin user
-    echo "Creating Airflow admin user..."
-    FLASK_APP=airflow.www.app flask fab create-admin --username=admin --firstname="" --lastname="" --email="" --password="${AIRFLOW_ADMIN_PASSWORD}"
-fi
-
 echo "Starting Airflow in ${AIRFLOW_MODE} mode...."
 
 # Wait for Postresql
@@ -109,6 +100,15 @@ then
   fi
 
   if [ "${AIRFLOW_MODE}" == "webserver" ]; then
+    if [[ -z ${AIRFLOW_ADMIN_PASSWORD} ]] ; then
+        echo "Cannot create Airflow admin user, AIRFLOW_ADMIN_PASSWORD is not defined."
+        exit
+    else
+        # create Airflow admin user
+        echo "Creating Airflow admin user..."
+        FLASK_APP=airflow.www.app flask fab create-admin --username=admin --firstname="" --lastname="" --email="" --password="${AIRFLOW_ADMIN_PASSWORD}"
+    fi
+
     # init db
     echo exec $CMD db init
     $CMD db init
