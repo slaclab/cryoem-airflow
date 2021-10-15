@@ -16,6 +16,7 @@ PASSWORD = None
 if 'REDIS_CONFIG' in os.environ:
   PASSWORD = os.environ['REDIS_CONFIG'].split().pop(-1)
 
+PASSWORD = os.environ['REDIS_PASSWORD']
 
 def get_files( client, redis_key, batch_size=50, exclude=['.xml',] ):
   transfer = {}
