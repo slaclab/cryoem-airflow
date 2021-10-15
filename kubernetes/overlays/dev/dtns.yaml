@@ -46,22 +46,22 @@ spec:
           value: temalpha
         - name: REDIS_SERVICE_HOST
           value: redis
-        - name: REDIS_CONFIG
+        - name: REDIS_PASSWORD
           valueFrom:
             secretKeyRef:
+              key: password
               name: redis
-              key: redis-config
         - name: SOURCE_DIRECTORY
           value: /srv/cryoem/temalpha
         #- name: DRY_RUN
         #  value: "1"
         volumeMounts:
           - name: exp
-            mountPath: /lscratch/cryoem-daq--dev/cryoem/exp/
+            mountPath: /srv/cryoem/exp/
           - name: temalpha
-            mountPath: /lscratch/cryoem-daq--dev/srv/cryoem/temalpha
-          #- name: tembeta-gainrefs
-          #  mountPath: /srv/cryoem/tembeta-gainrefs
+            mountPath: /srv/cryoem/temalpha
+          #- name: temalpha-gainrefs
+          #  mountPath: /srv/cryoem/temalpha-gainrefs
       volumes:
         - name: exp
           persistentVolumeClaim:

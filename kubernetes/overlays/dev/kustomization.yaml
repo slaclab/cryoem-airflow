@@ -52,4 +52,5 @@ images:
   #newTag: '20210921.0'
   # 2.1.4
   newTag: '20211015.2'
- 
+- name: slaclab/cryoem-airflow-dtn
+  newTag: '20211015.0'
