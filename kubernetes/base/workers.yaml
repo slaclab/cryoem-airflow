@@ -66,11 +66,11 @@ spec:
               key: database
         - name: REDIS_SERVICE_HOST
           value: redis
-        - name: REDIS_CONFIG
-          valueFrom:
-            secretKeyRef:
-              name: redis
-              key: redis-config
+        #- name: REDIS_CONFIG
+        #  valueFrom:
+        #    secretKeyRef:
+        #      name: redis
+        #      key: redis-config
         - name: FERNET_KEY
           valueFrom:
             secretKeyRef:
@@ -85,8 +85,8 @@ spec:
           mountPath: /usr/local/airflow/logs
         - name: exp
           mountPath: /gpfs/slac/cryo/fs1/exp/
-        - name: sdf-exp
-          mountPath: /sdf/group/cryoem/exp/
+        #- name: sdf-exp
+        #  mountPath: /sdf/group/cryoem/exp/
         - name: tem1
           mountPath: /srv/cryoem/tem1
         - name: tem1-gainrefs
@@ -130,9 +130,9 @@ spec:
       - name: exp
         persistentVolumeClaim:
           claimName: cryoem-daq-prod--exp
-      - name: sdf-exp
-        persistentVolumeClaim:
-          claimName: cryoem-daq-prod--sdf-exp
+      #- name: sdf-exp
+      #  persistentVolumeClaim:
+      #    claimName: cryoem-daq-prod--sdf-exp
       - name: tem1
         persistentVolumeClaim:
           claimName: cryoem-daq-prod--tem1

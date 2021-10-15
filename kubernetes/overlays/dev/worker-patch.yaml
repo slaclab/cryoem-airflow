@@ -9,6 +9,8 @@ spec:
       containers:
       - name: worker
         env:
+        - name: AIRFLOW_MODE
+          value: celery worker -q dtn,default
         - name: REDIS_PASSWORD
           valueFrom:
             secretKeyRef:

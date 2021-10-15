@@ -31,7 +31,7 @@ spec:
         imagePullPolicy: Always
         env:
         - name: AIRFLOW_MODE
-          value: "worker -q dtn-temalpha"
+          value: "celery worker -q dtn-temalpha"
         - name: POSTGRES_SERVICE_HOST
           valueFrom:
             configMapKeyRef:
@@ -131,7 +131,7 @@ spec:
         imagePullPolicy: Always
         env:
         - name: AIRFLOW_MODE
-          value: "worker -q dtn-tembeta"
+          value: "celery worker -q dtn-tembeta"
         - name: POSTGRES_SERVICE_HOST
           valueFrom:
             configMapKeyRef:
@@ -230,7 +230,7 @@ spec:
         imagePullPolicy: Always
         env:
         - name: AIRFLOW_MODE
-          value: "worker -q dtn-temgamma"
+          value: "celery worker -q dtn-temgamma"
         - name: POSTGRES_SERVICE_HOST
           valueFrom:
             configMapKeyRef:
@@ -329,7 +329,7 @@ spec:
         imagePullPolicy: Always
         env:
         - name: AIRFLOW_MODE
-          value: "worker -q dtn-tem3"
+          value: "celery worker -q dtn-tem3"
         - name: POSTGRES_SERVICE_HOST
           valueFrom:
             configMapKeyRef:
@@ -431,7 +431,7 @@ spec:
         imagePullPolicy: Always
         env:
         - name: AIRFLOW_MODE
-          value: "worker -q dtn-tem2"
+          value: "celery worker -q dtn-tem2"
         - name: POSTGRES_SERVICE_HOST
           valueFrom:
             configMapKeyRef:
@@ -534,7 +534,7 @@ spec:
         imagePullPolicy: Always
         env:
         - name: AIRFLOW_MODE
-          value: "worker -q dtn-tem1"
+          value: "celery worker -q dtn-tem1"
         - name: POSTGRES_SERVICE_HOST
           valueFrom:
             configMapKeyRef:
@@ -636,7 +636,7 @@ spec:
         imagePullPolicy: Always
         env:
         - name: AIRFLOW_MODE
-          value: "worker -q dtn-tem4"
+          value: "celery worker -q dtn-tem4"
         - name: POSTGRES_SERVICE_HOST
           valueFrom:
             configMapKeyRef:
