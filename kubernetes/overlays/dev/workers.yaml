@@ -4,7 +4,7 @@ kind: Deployment
 metadata:
   name: worker-temalpha
 spec:
-  replicas: 2 
+  replicas: 1 
   selector:
     matchLabels:
       role: worker
@@ -104,7 +104,7 @@ kind: Deployment
 metadata:
   name: worker-tembeta
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       role: worker
@@ -203,7 +203,7 @@ kind: Deployment
 metadata:
   name: worker-temgamma
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       role: worker
@@ -302,7 +302,7 @@ kind: Deployment
 metadata:
   name: worker-tem3
 spec:
-  replicas: 2 
+  replicas: 1 
   selector:
     matchLabels:
       role: worker
@@ -404,7 +404,7 @@ kind: Deployment
 metadata:
   name: worker-tem2
 spec:
-  replicas: 2
+  replicas: 1 
   selector:
     matchLabels:
       role: worker
@@ -507,7 +507,7 @@ kind: Deployment
 metadata:
   name: worker-tem1
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       role: worker
@@ -609,7 +609,7 @@ kind: Deployment
 metadata:
   name: worker-tem4
 spec:
-  replicas: 2
+  replicas: 1 
   selector:
     matchLabels:
       role: worker
