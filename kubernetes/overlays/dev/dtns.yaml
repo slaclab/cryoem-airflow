@@ -46,11 +46,11 @@ spec:
           value: temalpha
         - name: REDIS_SERVICE_HOST
           value: redis
-        - name: REDIS_CONFIG
+        - name: REDIS_PASSWORD
           valueFrom:
             secretKeyRef:
+              key: password
               name: redis
-              key: redis-config
         - name: SOURCE_DIRECTORY
           value: /srv/cryoem/temalpha
         #- name: DRY_RUN
