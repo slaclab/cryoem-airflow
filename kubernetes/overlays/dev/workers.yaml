@@ -54,11 +54,11 @@ spec:
               key: database
         - name: REDIS_SERVICE_HOST
           value: redis
-        - name: REDIS_CONFIG
+        - name: REDIS_PASSWORD
           valueFrom:
             secretKeyRef:
+              key: password
               name: redis
-              key: redis-config
         - name: FERNET_KEY
           valueFrom:
             secretKeyRef:
@@ -154,11 +154,11 @@ spec:
               key: database
         - name: REDIS_SERVICE_HOST
           value: redis
-        - name: REDIS_CONFIG
+        - name: REDIS_PASSWORD
           valueFrom:
             secretKeyRef:
+              key: password
               name: redis
-              key: redis-config
         - name: FERNET_KEY
           valueFrom:
             secretKeyRef:
@@ -253,11 +253,11 @@ spec:
               key: database
         - name: REDIS_SERVICE_HOST
           value: redis
-        - name: REDIS_CONFIG
+        - name: REDIS_PASSWORD
           valueFrom:
             secretKeyRef:
+              key: password
               name: redis
-              key: redis-config
         - name: FERNET_KEY
           valueFrom:
             secretKeyRef:
@@ -352,11 +352,11 @@ spec:
               key: database
         - name: REDIS_SERVICE_HOST
           value: redis
-        - name: REDIS_CONFIG
+        - name: REDIS_PASSWORD
           valueFrom:
             secretKeyRef:
+              key: password
               name: redis
-              key: redis-config
         - name: FERNET_KEY
           valueFrom:
             secretKeyRef:
@@ -454,11 +454,11 @@ spec:
               key: database
         - name: REDIS_SERVICE_HOST
           value: redis
-        - name: REDIS_CONFIG
+        - name: REDIS_PASSWORD
           valueFrom:
             secretKeyRef:
+              key: password
               name: redis
-              key: redis-config
         - name: FERNET_KEY
           valueFrom:
             secretKeyRef:
@@ -557,11 +557,11 @@ spec:
               key: database
         - name: REDIS_SERVICE_HOST
           value: redis
-        - name: REDIS_CONFIG
+        - name: REDIS_PASSWORD
           valueFrom:
             secretKeyRef:
+              key: password
               name: redis
-              key: redis-config
         - name: FERNET_KEY
           valueFrom:
             secretKeyRef:
@@ -659,11 +659,11 @@ spec:
               key: database
         - name: REDIS_SERVICE_HOST
           value: redis
-        - name: REDIS_CONFIG
+        - name: REDIS_PASSWORD
           valueFrom:
             secretKeyRef:
+              key: password
               name: redis
-              key: redis-config
         - name: FERNET_KEY
           valueFrom:
             secretKeyRef:

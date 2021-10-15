@@ -8,6 +8,12 @@ spec:
     spec:
       containers:
       - name: worker
+        env:
+        - name: REDIS_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: password
+              name: redis
         volumeMounts:
         - name: airflow-dags
           mountPath: /usr/local/airflow/dags
