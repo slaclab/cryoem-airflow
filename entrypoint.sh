@@ -65,7 +65,7 @@ echo '=========='
 echo "Starting Airflow in ${AIRFLOW_MODE} mode...."
 
 # Wait for Postresql
-if [[ "${AIRFLOW_MODE}" == "webserver" || "${AIRFLOW_MODE}" == "worker" || "${AIRFLOW_MODE}" == "scheduler" ]] ; then
+if [[ "${AIRFLOW_MODE}" = "webserver" || "${AIRFLOW_MODE}" = "worker" || "${AIRFLOW_MODE}" = "scheduler" ]] ; then
   i=0
   echo "Checking db connection to $POSTGRES_SERVICE_HOST:$POSTGRES_SERVICE_PORT..."
   while ! nc -z $POSTGRES_SERVICE_HOST $POSTGRES_SERVICE_PORT >/dev/null 2>&1 < /dev/null; do
@@ -82,10 +82,10 @@ if [[ "${AIRFLOW_MODE}" == "webserver" || "${AIRFLOW_MODE}" == "worker" || "${AI
 fi
 
 # Update configuration depending the type of Executor
-if [ "$AIRFLOW_EXECUTOR" == "Celery" ]
+if [ "$AIRFLOW_EXECUTOR" = "Celery" ]
 then
   # Wait for Redis
-  if [[ "${AIRFLOW_MODE}" == "webserver" || "${AIRFLOW_MODE}" = "worker" || "${AIRFLOW_MODE}" = "scheduler" || "${AIRFLOW_MODE}" = "flower" ]] ; then
+  if [[ "${AIRFLOW_MODE}" = "webserver" || "${AIRFLOW_MODE}" = "worker" || "${AIRFLOW_MODE}" = "scheduler" || "${AIRFLOW_MODE}" = "flower" ]] ; then
     j=0
     echo "Checking redis connection to $REDIS_SERVICE_HOST:$REDIS_SERVICE_PORT..."
     while ! nc -z $REDIS_SERVICE_HOST $REDIS_SERVICE_PORT >/dev/null 2>&1 < /dev/null; do
@@ -99,7 +99,7 @@ then
     done
   fi
 
-  if [ "${AIRFLOW_MODE}" == "webserver" ]; then
+  if [[ "${AIRFLOW_MODE}" == "webserver" ]]; then
     if [[ -z ${AIRFLOW_ADMIN_PASSWORD} ]] ; then
         echo "Cannot create Airflow admin user, AIRFLOW_ADMIN_PASSWORD is not defined."
         exit
@@ -112,11 +112,16 @@ then
     # init db
     echo exec $CMD db init
     $CMD db init
-  #elif [ "${AIRFLOW_MODE}" == "scheduler" ]; then
+  #elif [ "${AIRFLOW_MODE}" = "scheduler" ]; then
   #  sleep 5
   fi
-  echo Running... $CMD ${AIRFLOW_MODE}
-  exec $CMD ${AIRFLOW_MODE}
+  if [[ "${AIRFLOW_MODE}" = "worker" || "${AIRFLOW_MODE}" = "flower" ]]; then
+    echo Running... $CMD celery ${AIRFLOW_MODE}
+    exec $CMD celery ${AIRFLOW_MODE}
+  else
+    echo Running... $CMD ${AIRFLOW_MODE}
+    exec $CMD ${AIRFLOW_MODE}
+  fi
 
 # spit out version and exit
 else

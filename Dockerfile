@@ -53,7 +53,10 @@ RUN set -ex \
         pyasn1 \
         sqlalchemy==1.3.23 \
         Flask-SQLAlchemy==2.4.4 \
-        apache-airflow[crypto,celery,postgres,hive,jdbc,mysql,ssh${AIRFLOW_DEPS:+,}${AIRFLOW_DEPS}]==${AIRFLOW_VERSION} \
+        apache-airflow-providers-celery==2.0.0 \
+        celery==4.4.7 \
+        apache-airflow-providers-postgres \
+        apache-airflow[crypto,postgres,hive,jdbc,mysql,ssh${AIRFLOW_DEPS:+,}${AIRFLOW_DEPS}]==${AIRFLOW_VERSION} \
         apache-airflow-upgrade-check \
         'redis==3.2' \
         statsd \

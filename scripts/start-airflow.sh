@@ -98,14 +98,19 @@ then
   echo '=========='
 
   if [ "${AIRFLOW_MODE}" = "webserver" ]; then
-    # init db
-    echo exec $CMD initdb
-    $CMD initdb
+    # initialize db
+    echo exec $CMD db init
+    $CMD db init
   else
     sleep 10
   fi
-  echo exec $CMD "${AIRFLOW_MODE}"
-  exec $CMD "${AIRFLOW_MODE}"
+  if [[ "${AIRFLOW_MODE}" = "worker" || "${AIRFLOW_MODE}" = "flower" ]]; then
+    echo exec $CMD celery "${AIRFLOW_MODE}"
+    exec $CMD celery "${AIRFLOW_MODE}"
+  else
+    echo exec $CMD "${AIRFLOW_MODE}"
+    exec $CMD "${AIRFLOW_MODE}"
+  fi
 
 # spit out version and exit
 else
