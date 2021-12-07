@@ -24,7 +24,7 @@ spec:
         - name: airflow-logs
           mountPath: /usr/local/airflow/logs
         - name: exp
-          mountPath: /lscratch/cryoem-daq--dev/cryoem/exp/
+          mountPath: /lscratch/cryoem-daq--dev/exp/
         - name: tem1
           mountPath: /lscratch/cryoem-daq--dev/srv/cryoem/tem1
         - name: tem1-gainrefs

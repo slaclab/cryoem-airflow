@@ -22,7 +22,7 @@ spec:
         - name: AIRFLOW_ADMIN_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: airflow-www
+              name: www
               key: admin-password
 ---
 

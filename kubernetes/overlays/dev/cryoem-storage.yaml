@@ -12,7 +12,7 @@ spec:
   accessModes:
     - ReadWriteMany
   local:
-    path: /lscratch/cryoem-daq--dev/gpfs/exp
+    path: /lscratch/cryoem-daq--dev/exp
   nodeAffinity:
     required:
       nodeSelectorTerms:

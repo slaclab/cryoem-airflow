@@ -16,11 +16,3 @@ spec:
       - name: airflow-logs
         persistentVolumeClaim:
           claimName: cryoem-daq-dev--logs
-      containers:
-      - name: scheduler
-        env:
-        - name: AIRFLOW_ADMIN_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: airflow-www
-              key: admin-password

@@ -27,7 +27,7 @@ spec:
         #fsGroup:
       containers:
       - name: worker-temalpha
-        image: slaclab/cryoem-airflow:20200317.0
+        image: slaclab/cryoem-airflow:20211024.0
         imagePullPolicy: Always
         env:
         - name: AIRFLOW_MODE
@@ -72,7 +72,7 @@ spec:
           - name: airflow-logs
             mountPath: /usr/local/airflow/logs
           - name: exp
-            mountPath: /lscratch/cryoem-daq--dev/cryoem/exp/
+            mountPath: /lscratch/cryoem-daq--dev/exp/
           - name: temalpha
             mountPath: /lscratch/cryoem-daq--dev/srv/cryoem/temalpha
           #- name: temalpha-gainrefs
@@ -157,8 +157,8 @@ spec:
         - name: REDIS_PASSWORD
           valueFrom:
             secretKeyRef:
-              key: password
               name: redis
+              key: password
         - name: FERNET_KEY
           valueFrom:
             secretKeyRef:
@@ -256,8 +256,8 @@ spec:
         - name: REDIS_PASSWORD
           valueFrom:
             secretKeyRef:
-              key: password
               name: redis
+              key: password
         - name: FERNET_KEY
           valueFrom:
             secretKeyRef:
@@ -271,7 +271,7 @@ spec:
           - name: airflow-logs
             mountPath: /usr/local/airflow/logs
           - name: exp
-            mountPath: /lscratch/cryoem-daq--dev/cryoem/exp/
+            mountPath: /lscratch/cryoem-daq--dev/exp/
           - name: temgamma
             mountPath: /lscratch/cryoem-daq--dev/srv/cryoem/temgamma
           - name: temgamma-gainrefs
@@ -355,8 +355,8 @@ spec:
         - name: REDIS_PASSWORD
           valueFrom:
             secretKeyRef:
-              key: password
               name: redis
+              key: password 
         - name: FERNET_KEY
           valueFrom:
             secretKeyRef:
@@ -457,8 +457,8 @@ spec:
         - name: REDIS_PASSWORD
           valueFrom:
             secretKeyRef:
-              key: password
               name: redis
+              key: password
         - name: FERNET_KEY
           valueFrom:
             secretKeyRef:
@@ -560,8 +560,8 @@ spec:
         - name: REDIS_PASSWORD
           valueFrom:
             secretKeyRef:
-              key: password
               name: redis
+              key: password
         - name: FERNET_KEY
           valueFrom:
             secretKeyRef:
@@ -662,8 +662,8 @@ spec:
         - name: REDIS_PASSWORD
           valueFrom:
             secretKeyRef:
-              key: password
               name: redis
+              key: password
         - name: FERNET_KEY
           valueFrom:
             secretKeyRef:
