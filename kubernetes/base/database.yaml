@@ -14,8 +14,8 @@ spec:
     targetPort: 5432
   selector:
     role: postgres
-  type: LoadBalancer
-  loadBalancerIP: 172.23.99.159
+#  type: LoadBalancer
+#  loadBalancerIP: 172.23.99.159
 
 
 ---
