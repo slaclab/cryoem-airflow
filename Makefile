@@ -1,16 +1,16 @@
 TAG ?= latest
+WORKDIR ?= "/gpfs/slac/cryo/fs1/daq/dev/airflow/bin"
 
 server:
-	sudo docker build . -t slaclab/cryoem-airflow:${TAG}
-	sudo docker push slaclab/cryoem-airflow:${TAG}
+	docker build . -t slaclab/cryoem-airflow:${TAG}
+	docker push slaclab/cryoem-airflow:${TAG}
 
 worker:
-	sudo docker build . -f Dockerfile.worker -t slaclab/cryoem-airflow-worker:${TAG}
-	sudo docker push slaclab/cryoem-airflow-worker:${TAG}
-	sudo singularity pull -F /gpfs/slac/cryo/fs1/daq/dev/airflow/bin/cryoem-airflow-worker\@${TAG}.sif docker://slaclab/cryoem-airflow-worker:${TAG}
-	#mv cryoem-airflow-worker_${TAG}.sif /gpfs/slac/cryo/fs1/daq/dev/airflow/bin/cryoem-airflow-worker\@${TAG}.sif
+	docker build . -f Dockerfile.worker -t slaclab/cryoem-airflow-worker:${TAG}
+	docker login -u slaclab 
+	docker push slaclab/cryoem-airflow-worker:${TAG}
+	singularity pull -F ${WORKDIR}/cryoem-airflow-worker\@${TAG}.sif docker://slaclab/cryoem-airflow-worker:${TAG}
 
 dtn:
-	sudo docker build . -f Dockerfile.dtn -t slaclab/cryoem-airflow-dtn:${TAG}
-	sudo docker push slaclab/cryoem-airflow-dtn:${TAG}
-
+	docker build . -f Dockerfile.dtn -t slaclab/cryoem-airflow-dtn:${TAG}
+	docker push slaclab/cryoem-airflow-dtn:${TAG}
