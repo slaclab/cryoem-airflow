@@ -6,7 +6,7 @@ metadata:
     metallb.universe.tf/address-pool: internal
     metallb.universe.tf/allow-shared-ip: cryoem-daq-dev
 spec:
-  loadBalancerIP: 172.23.99.159
+  loadBalancerIP: 172.23.99.151
 
 ---
 apiVersion: apps/v1

@@ -5,8 +5,8 @@ metadata:
     metallb.universe.tf/address-pool: internal
     metallb.universe.tf/allow-shared-ip: cryoem-daq-dev
   name: redis
-#spec:
-#  loadBalancerIP: 172.23.99.160
+spec:
+  loadBalancerIP: 172.23.99.151
 
 
 ---
