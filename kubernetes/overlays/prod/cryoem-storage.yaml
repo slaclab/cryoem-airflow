@@ -2,11 +2,11 @@
 kind: PersistentVolume
 apiVersion: v1
 metadata:
-  name: cryoem-daq-prod--exp
+  name: cryoem-daq--prod--exp
   labels:
     type: local
 spec:
-  storageClassName: cryoem-daq-prod--exp
+  storageClassName: cryoem-daq--prod--exp
   capacity:
     storage: 20Gi
   accessModes:
@@ -26,9 +26,9 @@ spec:
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: cryoem-daq-prod--exp
+  name: cryoem-daq--prod--exp
 spec:
-  storageClassName: cryoem-daq-prod--exp
+  storageClassName: cryoem-daq--prod--exp
   accessModes:
     - "ReadWriteMany"
   resources:
@@ -39,11 +39,11 @@ spec:
 kind: PersistentVolume
 apiVersion: v1
 metadata:
-  name: cryoem-daq-prod--sdf-exp
+  name: cryoem-daq--prod--sdf-exp
   labels:
     type: local
 spec:
-  storageClassName: cryoem-daq-prod--sdf-exp
+  storageClassName: cryoem-daq--prod--sdf-exp
   capacity:
     storage: 20Gi
   accessModes:
@@ -63,9 +63,9 @@ spec:
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: cryoem-daq-prod--sdf-exp
+  name: cryoem-daq--prod--sdf-exp
 spec:
-  storageClassName: cryoem-daq-prod--sdf-exp
+  storageClassName: cryoem-daq--prod--sdf-exp
   accessModes:
     - "ReadWriteMany"
   resources:
@@ -79,11 +79,11 @@ spec:
 kind: PersistentVolume
 apiVersion: v1
 metadata:
-  name: cryoem-daq-prod--tem1
+  name: cryoem-daq--prod--tem1
   labels:
     type: local
 spec:
-  storageClassName: cryoem-daq-prod--tem1
+  storageClassName: cryoem-daq--prod--tem1
   capacity:
     storage: 20Gi
   accessModes:
@@ -102,11 +102,11 @@ spec:
 kind: PersistentVolume
 apiVersion: v1
 metadata:
-  name: cryoem-daq-prod--tem1-gainrefs
+  name: cryoem-daq--prod--tem1-gainrefs
   labels:
     type: local
 spec:
-  storageClassName: cryoem-daq-prod--tem1-gainrefs
+  storageClassName: cryoem-daq--prod--tem1-gainrefs
   capacity:
     storage: 20Gi
   accessModes:
@@ -125,9 +125,9 @@ spec:
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: cryoem-daq-prod--tem1
+  name: cryoem-daq--prod--tem1
 spec:
-  storageClassName: cryoem-daq-prod--tem1
+  storageClassName: cryoem-daq--prod--tem1
   accessModes:
     - "ReadWriteMany"
   resources:
@@ -137,9 +137,9 @@ spec:
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: cryoem-daq-prod--tem1-gainrefs
+  name: cryoem-daq--prod--tem1-gainrefs
 spec:
-  storageClassName: cryoem-daq-prod--tem1-gainrefs
+  storageClassName: cryoem-daq--prod--tem1-gainrefs
   accessModes:
     - "ReadWriteMany"
   resources:
@@ -153,11 +153,11 @@ spec:
 kind: PersistentVolume
 apiVersion: v1
 metadata:
-  name: cryoem-daq-prod--tem2
+  name: cryoem-daq--prod--tem2
   labels:
     type: local
 spec:
-  storageClassName: cryoem-daq-prod--tem2
+  storageClassName: cryoem-daq--prod--tem2
   capacity:
     storage: 20Gi
   accessModes:
@@ -178,11 +178,11 @@ spec:
 kind: PersistentVolume
 apiVersion: v1
 metadata:
-  name: cryoem-daq-prod--tem2-gainrefs
+  name: cryoem-daq--prod--tem2-gainrefs
   labels:
     type: local
 spec:
-  storageClassName: cryoem-daq-prod--tem2-gainrefs
+  storageClassName: cryoem-daq--prod--tem2-gainrefs
   capacity:
     storage: 20Gi
   accessModes:
@@ -201,9 +201,9 @@ spec:
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: cryoem-daq-prod--tem2
+  name: cryoem-daq--prod--tem2
 spec:
-  storageClassName: cryoem-daq-prod--tem2
+  storageClassName: cryoem-daq--prod--tem2
   accessModes:
     - "ReadWriteMany"
   resources:
@@ -213,9 +213,9 @@ spec:
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: cryoem-daq-prod--tem2-gainrefs
+  name: cryoem-daq--prod--tem2-gainrefs
 spec:
-  storageClassName: cryoem-daq-prod--tem2-gainrefs
+  storageClassName: cryoem-daq--prod--tem2-gainrefs
   accessModes:
     - "ReadWriteMany"
   resources:
@@ -225,11 +225,11 @@ spec:
 kind: PersistentVolume
 apiVersion: v1
 metadata:
-  name: cryoem-daq-prod--tem3
+  name: cryoem-daq--prod--tem3
   labels:
     type: local
 spec:
-  storageClassName: cryoem-daq-prod--tem3
+  storageClassName: cryoem-daq--prod--tem3
   capacity:
     storage: 20Gi
   accessModes:
@@ -248,11 +248,11 @@ spec:
 kind: PersistentVolume
 apiVersion: v1
 metadata:
-  name: cryoem-daq-prod--tem3-gainrefs
+  name: cryoem-daq--prod--tem3-gainrefs
   labels:
     type: local
 spec:
-  storageClassName: cryoem-daq-prod--tem3-gainrefs
+  storageClassName: cryoem-daq--prod--tem3-gainrefs
   capacity:
     storage: 20Gi
   accessModes:
@@ -271,9 +271,9 @@ spec:
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: cryoem-daq-prod--tem3
+  name: cryoem-daq--prod--tem3
 spec:
-  storageClassName: cryoem-daq-prod--tem3
+  storageClassName: cryoem-daq--prod--tem3
   accessModes:
     - "ReadWriteMany"
   resources:
@@ -283,9 +283,9 @@ spec:
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: cryoem-daq-prod--tem3-gainrefs
+  name: cryoem-daq--prod--tem3-gainrefs
 spec:
-  storageClassName: cryoem-daq-prod--tem3-gainrefs
+  storageClassName: cryoem-daq--prod--tem3-gainrefs
   accessModes:
     - "ReadWriteMany"
   resources:
@@ -297,11 +297,11 @@ spec:
 kind: PersistentVolume
 apiVersion: v1
 metadata:
-  name: cryoem-daq-prod--tem4
+  name: cryoem-daq--prod--tem4
   labels:
     type: local
 spec:
-  storageClassName: cryoem-daq-prod--tem4
+  storageClassName: cryoem-daq--prod--tem4
   capacity:
     storage: 20Gi
   accessModes:
@@ -320,11 +320,11 @@ spec:
 kind: PersistentVolume
 apiVersion: v1
 metadata:
-  name: cryoem-daq-prod--tem4-gainrefs
+  name: cryoem-daq--prod--tem4-gainrefs
   labels:
     type: local
 spec:
-  storageClassName: cryoem-daq-prod--tem4-gainrefs
+  storageClassName: cryoem-daq--prod--tem4-gainrefs
   capacity:
     storage: 20Gi
   accessModes:
@@ -343,9 +343,9 @@ spec:
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: cryoem-daq-prod--tem4
+  name: cryoem-daq--prod--tem4
 spec:
-  storageClassName: cryoem-daq-prod--tem4
+  storageClassName: cryoem-daq--prod--tem4
   accessModes:
     - "ReadWriteMany"
   resources:
@@ -355,9 +355,9 @@ spec:
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: cryoem-daq-prod--tem4-gainrefs
+  name: cryoem-daq--prod--tem4-gainrefs
 spec:
-  storageClassName: cryoem-daq-prod--tem4-gainrefs
+  storageClassName: cryoem-daq--prod--tem4-gainrefs
   accessModes:
     - "ReadWriteMany"
   resources:
@@ -369,11 +369,11 @@ spec:
 kind: PersistentVolume
 apiVersion: v1
 metadata:
-  name: cryoem-daq-prod--tembeta
+  name: cryoem-daq--prod--tembeta
   labels:
     type: local
 spec:
-  storageClassName: cryoem-daq-prod--tembeta
+  storageClassName: cryoem-daq--prod--tembeta
   capacity:
     storage: 20Gi
   accessModes:
@@ -392,11 +392,11 @@ spec:
 kind: PersistentVolume
 apiVersion: v1
 metadata:
-  name: cryoem-daq-prod--tembeta-gainrefs
+  name: cryoem-daq--prod--tembeta-gainrefs
   labels:
     type: local
 spec:
-  storageClassName: cryoem-daq-prod--tembeta-gainrefs
+  storageClassName: cryoem-daq--prod--tembeta-gainrefs
   capacity:
     storage: 20Gi
   accessModes:
@@ -415,9 +415,9 @@ spec:
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: cryoem-daq-prod--tembeta
+  name: cryoem-daq--prod--tembeta
 spec:
-  storageClassName: cryoem-daq-prod--tembeta
+  storageClassName: cryoem-daq--prod--tembeta
   accessModes:
     - "ReadWriteMany"
   resources:
@@ -427,9 +427,9 @@ spec:
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: cryoem-daq-prod--tembeta-gainrefs
+  name: cryoem-daq--prod--tembeta-gainrefs
 spec:
-  storageClassName: cryoem-daq-prod--tembeta-gainrefs
+  storageClassName: cryoem-daq--prod--tembeta-gainrefs
   accessModes:
     - "ReadWriteMany"
   resources:
@@ -443,11 +443,11 @@ spec:
 kind: PersistentVolume
 apiVersion: v1
 metadata:
-  name: cryoem-daq-prod--temalpha
+  name: cryoem-daq--prod--temalpha
   labels:
     type: local
 spec:
-  storageClassName: cryoem-daq-prod--temalpha
+  storageClassName: cryoem-daq--prod--temalpha
   capacity:
     storage: 20Gi
   accessModes:
@@ -466,11 +466,11 @@ spec:
 kind: PersistentVolume
 apiVersion: v1
 metadata:
-  name: cryoem-daq-prod--temalpha-gainrefs
+  name: cryoem-daq--prod--temalpha-gainrefs
   labels:
     type: local
 spec:
-  storageClassName: cryoem-daq-prod--temalpha-gainrefs
+  storageClassName: cryoem-daq--prod--temalpha-gainrefs
   capacity:
     storage: 20Gi
   accessModes:
@@ -489,9 +489,9 @@ spec:
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: cryoem-daq-prod--temalpha
+  name: cryoem-daq--prod--temalpha
 spec:
-  storageClassName: cryoem-daq-prod--temalpha
+  storageClassName: cryoem-daq--prod--temalpha
   accessModes:
     - "ReadWriteMany"
   resources:
@@ -501,9 +501,9 @@ spec:
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: cryoem-daq-prod--temalpha-gainrefs
+  name: cryoem-daq--prod--temalpha-gainrefs
 spec:
-  storageClassName: cryoem-daq-prod--temalpha-gainrefs
+  storageClassName: cryoem-daq--prod--temalpha-gainrefs
   accessModes:
     - "ReadWriteMany"
   resources:
@@ -518,11 +518,11 @@ spec:
 kind: PersistentVolume
 apiVersion: v1
 metadata:
-  name: cryoem-daq-prod--fib1
+  name: cryoem-daq--prod--fib1
   labels:
     type: local
 spec:
-  storageClassName: cryoem-daq-prod--fib1
+  storageClassName: cryoem-daq--prod--fib1
   capacity:
     storage: 20Gi
   accessModes:
@@ -541,9 +541,9 @@ spec:
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: cryoem-daq-prod--fib1
+  name: cryoem-daq--prod--fib1
 spec:
-  storageClassName: cryoem-daq-prod--fib1
+  storageClassName: cryoem-daq--prod--fib1
   accessModes:
     - "ReadWriteMany"
   resources:
@@ -555,11 +555,11 @@ spec:
 kind: PersistentVolume
 apiVersion: v1
 metadata:
-  name: cryoem-daq-prod--temgamma
+  name: cryoem-daq--prod--temgamma
   labels:
     type: local
 spec:
-  storageClassName: cryoem-daq-prod--temgamma
+  storageClassName: cryoem-daq--prod--temgamma
   capacity:
     storage: 20Gi
   accessModes:
@@ -578,11 +578,11 @@ spec:
 kind: PersistentVolume
 apiVersion: v1
 metadata:
-  name: cryoem-daq-prod--temgamma-gainrefs
+  name: cryoem-daq--prod--temgamma-gainrefs
   labels:
     type: local
 spec:
-  storageClassName: cryoem-daq-prod--temgamma-gainrefs
+  storageClassName: cryoem-daq--prod--temgamma-gainrefs
   capacity:
     storage: 20Gi
   accessModes:
@@ -601,9 +601,9 @@ spec:
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: cryoem-daq-prod--temgamma
+  name: cryoem-daq--prod--temgamma
 spec:
-  storageClassName: cryoem-daq-prod--temgamma
+  storageClassName: cryoem-daq--prod--temgamma
   accessModes:
     - "ReadWriteMany"
   resources:
@@ -613,9 +613,9 @@ spec:
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: cryoem-daq-prod--temgamma-gainrefs
+  name: cryoem-daq--prod--temgamma-gainrefs
 spec:
-  storageClassName: cryoem-daq-prod--temgamma-gainrefs
+  storageClassName: cryoem-daq--prod--temgamma-gainrefs
   accessModes:
     - "ReadWriteMany"
   resources:

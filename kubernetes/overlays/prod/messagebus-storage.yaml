@@ -3,11 +3,11 @@
 kind: PersistentVolume
 apiVersion: v1
 metadata:
-  name: cryoem-daq-prod--redis-0
+  name: cryoem-daq--prod--redis-0
   labels:
     type: local
 spec:
-  storageClassName: cryoem-daq-prod--redis
+  storageClassName: cryoem-daq--prod--redis
   capacity:
     storage: 5Gi
   accessModes:
@@ -27,11 +27,11 @@ spec:
 kind: PersistentVolume
 apiVersion: v1
 metadata:
-  name: cryoem-daq-prod--sdf-redis-0
+  name: cryoem-daq--prod--sdf-redis-0
   labels:
     type: local
 spec:
-  storageClassName: cryoem-daq-prod--sdf-redis
+  storageClassName: cryoem-daq--prod--sdf-redis
   capacity:
     storage: 5Gi
   accessModes:

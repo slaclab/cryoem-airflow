@@ -22,4 +22,4 @@ spec:
       resources:
         requests:
           storage: 100Gi
-      storageClassName: cryoem-daq-prod--postgres
+      storageClassName: cryoem-daq--prod--postgres

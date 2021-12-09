@@ -3,18 +3,19 @@ kind: Deployment
 metadata:
   name: webserver
 spec:
+  replicas: 0
   template:
     spec:
       volumes:
-      #- name: airflow-dags
-      #  persistentVolumeClaim:
-      #    claimName: cryoem-daq-prod--sdf-dags
-      #- name: airflow-plugins
-      #  persistentVolumeClaim:
-      #    claimName: cryoem-daq-prod--sdf-plugins
-      #- name: airflow-logs
-      #  persistentVolumeClaim:
-      #    claimName: cryoem-daq-prod--sdf-logs
+      - name: airflow-dags
+        persistentVolumeClaim:
+          claimName: cryoem-daq--prod--sdf-dags
+      - name: airflow-plugins
+        persistentVolumeClaim:
+          claimName: cryoem-daq--prod--sdf-plugins
+      - name: airflow-logs
+        persistentVolumeClaim:
+          claimName: cryoem-daq--prod--sdf-logs
 
 ---
 

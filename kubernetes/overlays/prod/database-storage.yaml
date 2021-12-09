@@ -3,11 +3,11 @@
 kind: PersistentVolume
 apiVersion: v1
 metadata:
-  name: cryoem-daq-prod--postgres-0
+  name: cryoem-daq--prod--postgres-0
   labels:
     type: local
 spec:
-  storageClassName: cryoem-daq-prod--postgres
+  storageClassName: cryoem-daq--prod--postgres
   capacity:
     storage: 200Gi
   accessModes:

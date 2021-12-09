@@ -6,10 +6,10 @@ bases:
 resources:
 - ns.yaml
 - ingress.yaml
-#- cryoem-storage.yaml
+- cryoem-storage.yaml
 - database-storage.yaml
 - messagebus-storage.yaml
-#- airflow-storage.yaml
+- airflow-storage.yaml
 #- workers.yaml
 #- dtns.yaml
 
