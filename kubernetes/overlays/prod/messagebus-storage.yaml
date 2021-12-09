@@ -13,15 +13,15 @@ spec:
   accessModes:
     - ReadWriteOnce
   local:
-    path: /gpfs/slac/cryo/fs1/daq/prod/redis/
+    path: /data/cryoem-daq--prod/redis-0/
   nodeAffinity:
     required:
       nodeSelectorTerms:
       - matchExpressions:
-        - key: storage/cryoem
+        - key: kubernetes.io/hostname 
           operator: In
           values:
-          - 'true'
+          - neb0007.slac.stanford.edu
 
 ---
 kind: PersistentVolume

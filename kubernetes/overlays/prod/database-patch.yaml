@@ -3,10 +3,8 @@ kind: Service
 metadata:
   name: postgres
   annotations:
-    metallb.universe.tf/address-pool: internal
-    metallb.universe.tf/allow-shared-ip: cryoem-daq-dev
-spec:
-  loadBalancerIP: 172.23.99.159
+    metallb.universe.tf/address-pool: farm04-openstack
+    metallb.universe.tf/allow-shared-ip: cryoem-daq--prod
 
 ---
 apiVersion: apps/v1

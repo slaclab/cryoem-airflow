@@ -14,7 +14,7 @@ spec:
     - ReadWriteOnce
   #hostPath:
   local:
-    path: /pgdata/cryoem-daq-prod/database/postgres-0
+    path: /data/cryoem-daq--prod/postgres-0
   nodeAffinity:
     required:
       nodeSelectorTerms:
@@ -22,7 +22,8 @@ spec:
         - key: kubernetes.io/hostname
           operator: In
           values:
-          - cryoem-db01
+          - neb0007.slac.stanford.edu
+
 
 
 #

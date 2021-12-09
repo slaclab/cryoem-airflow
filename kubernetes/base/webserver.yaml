@@ -78,6 +78,11 @@ spec:
         #  initialDelaySeconds: 2 
         #  periodSeconds: 10
         env:
+        - name: AIRFLOW_ADMIN_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: www
+              key: admin-password
         - name: AIRFLOW_MODE
           value: webserver
         - name: POSTGRES_SERVICE_HOST
@@ -116,19 +121,19 @@ spec:
               name: airflow
               key: fernet-key
         volumeMounts:
-        - name: airflow-dags
-          mountPath: /usr/local/airflow/dags
-        - name: airflow-plugins
-          mountPath: /usr/local/airflow/plugins
-        - name: airflow-logs
-          mountPath: /usr/local/airflow/logs
+        #- name: airflow-dags
+        #  mountPath: /usr/local/airflow/dags
+        #- name: airflow-plugins
+        #  mountPath: /usr/local/airflow/plugins
+        #- name: airflow-logs
+        #  mountPath: /usr/local/airflow/logs
       volumes:
-      - name: airflow-dags
-        persistentVolumeClaim:
-          claimName: cryoem-daq-dev--dags
-      - name: airflow-plugins
-        persistentVolumeClaim:
-          claimName: cryoem-daq-dev--plugins
-      - name: airflow-logs
-        persistentVolumeClaim:
-          claimName: cryoem-daq-dev--logs
+      #- name: airflow-dags
+      #  persistentVolumeClaim:
+      #    claimName: cryoem-daq-dev--dags
+      #- name: airflow-plugins
+      #  persistentVolumeClaim:
+      #    claimName: cryoem-daq-dev--plugins
+      #- name: airflow-logs
+      #  persistentVolumeClaim:
+      #    claimName: cryoem-daq-dev--logs

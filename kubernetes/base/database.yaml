@@ -15,7 +15,6 @@ spec:
   selector:
     role: postgres
   type: LoadBalancer
-  loadBalancerIP: 172.23.99.159
 
 
 ---
