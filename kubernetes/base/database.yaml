@@ -16,7 +16,6 @@ spec:
     role: postgres
   type: LoadBalancer
 
-
 ---
 apiVersion: apps/v1
 kind: StatefulSet
