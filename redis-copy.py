@@ -4,6 +4,7 @@ import redis
 import os
 import logging
 from tempfile import NamedTemporaryFile
+import shlex
 import subprocess
 import time
 import argparse
@@ -15,8 +16,10 @@ CHMOD=' --chmod=ug+x,u+rw,g+r,g-w,o-rwx '
 PASSWORD = None
 if 'REDIS_CONFIG' in os.environ:
   PASSWORD = os.environ['REDIS_CONFIG'].split().pop(-1)
+else:
+  PASSWORD = os.environ['REDIS_PASSWORD']
 
-PASSWORD = os.environ['REDIS_PASSWORD']
+ZOMBIE_THRESHOLD = 500
 
 def get_files( client, redis_key, batch_size=50, exclude=['.xml',] ):
   transfer = {}
@@ -43,6 +46,31 @@ def get_files( client, redis_key, batch_size=50, exclude=['.xml',] ):
       pass
   return transfer
 
+def get_zombie_count():
+  zombie_count = 0
+  logging.info(f"Checking for zombie processes..." )
+  try:
+    ps = subprocess.Popen(['ps', '-eo', 'pid,ppid,state,cmd'], stdout=subprocess.PIPE)
+    defunct = subprocess.Popen(['awk', '$3=="Z" && $2=="1"'], stdin=ps.stdout, stdout=subprocess.PIPE)
+    zombie_count = subprocess.check_output(['wc', '-l'], stdin=defunct.stdout, encoding='utf-8')
+    zombie_count = int(zombie_count)
+    logging.info(f"{zombie_count} zombies found")
+  except subprocess.CalledProcessError as e:
+    logging.warn("Error attempting to get zombie count.")
+    logging.warn("Error %s: %s" % (e.errorcode, e.output))
+    pass
+  return zombie_count
+
+def double_tap(): # stop the running container and let pod restart it without zombie infection
+  double_tap_cmd = ["kill", "-INT", "1"]
+  try:
+    logging.info(f"Zombie count exceeds threshold, killing zombies...")
+    logging.info(f">>{double_tap_cmd}")
+    headshot = subprocess.check_output(double_tap_cmd)
+  except subprocess.CalledProcessError as e:
+    logging.warn("Error killing running container")
+    logging.warn("Error %s: %s" % (e.errorcode, e.output))
+  return
 
 def copy( client, redis_key, batch_size=50, parallel=5, dry_run=True ):
   # write to temp file to pipe into parallel
@@ -68,6 +96,9 @@ def copy( client, redis_key, batch_size=50, parallel=5, dry_run=True ):
         #logging.info(" copied over: %s" % (o,) )
         copied.append( o )
     logging.info("COPIED: %s" % (copied,))
+  zombie_count = get_zombie_count()
+  if zombie_count > ZOMBIE_THRESHOLD:
+    double_tap()
 
 
 def main( source_dir='/input', redis_host='redis', redis_key='tem', redis_port=6373, redis_db=4, batch_size=50, sleep_time=1, dry_run=True, parallel=5, **kwargs ):

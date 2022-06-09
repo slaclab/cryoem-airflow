@@ -27,7 +27,7 @@ spec:
         #fsGroup:
       containers:
       - name: dtn-temalpha
-        image: slaclab/cryoem-airflow-dtn:20201105.0
+        image: slaclab/cryoem-airflow-dtn:20220519.0
         imagePullPolicy: Always
         #livenessProbe:
         #  httpGet:

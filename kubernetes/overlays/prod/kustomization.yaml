@@ -48,14 +48,8 @@ configMapGenerator:
 
 images:
 - name: slaclab/cryoem-airflow
-  # 1.10.9
-  #newTag: '20200404.0'
-  # 1.10.15
-  #newTag: '20210917.0' 
-  # 2.1.3
-  #newTag: '20210921.0'
-  # 2.1.4
-  #newTag: '20211015.2'
-  newTag: '20211027.0'
+  # 1.10.9 (prod)
+  newTag: '20200404.0'
 - name: slaclab/cryoem-airflow-dtn
-  newTag: '20211015.0'
+  # kill zombies
+  newTag: '20220519.0'
