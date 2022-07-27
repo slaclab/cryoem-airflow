@@ -19,6 +19,8 @@ get-vault-secrets:
 	# daq-admin
 	vault kv get --field=username -format=json $(SECRET_PATH)/daq-admin | sed -e 's/\"//g' > etc/.secrets/daq-admin-username
 	vault kv get --field=password -format=json $(SECRET_PATH)/daq-admin | sed -e 's/\"//g' > etc/.secrets/daq-admin-password
+	# ingress
+	vault kv get --field=auth -format=json $(SECRET_PATH)/ingress | sed -e 's/\"//g' > etc/.secrets/www-auth
 	
 clean-secrets:
 	rm -rf etc/.secrets/
@@ -26,6 +28,9 @@ clean-secrets:
 cnpg-operator:
 	curl -L https://raw.githubusercontent.com/cloudnative-pg/cloudnative-pg/release-$(CNPG_VERSION)/releases/cnpg-$(CNPG_VERSION).0.yaml > cnpg-operator.yaml
 	kubectl apply -f cnpg-operator.yaml
+
+dump:
+	kubectl kustomize . | yh
 
 apply: 
 	kubectl apply -k .

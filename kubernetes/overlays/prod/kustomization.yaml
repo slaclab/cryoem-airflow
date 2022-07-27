@@ -51,6 +51,9 @@ secretGenerator:
   files:
   - etc/.secrets/daq-admin-username
   - etc/.secrets/daq-admin-password
+- name: www-auth
+  files:
+  - auth=etc/.secrets/www-auth
 
 configMapGenerator: 
 - name: postgres
