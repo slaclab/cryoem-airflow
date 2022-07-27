@@ -77,29 +77,24 @@ spec:
               name: airflow
               key: fernet-key
         volumeMounts:
-        - name: airflow-dags
+        - name: airflow-root
           mountPath: /usr/local/airflow/dags
-        - name: airflow-plugins
+          subPath: daq/prod/airflow/dags
+        - name: airflow-root
           mountPath: /usr/local/airflow/plugins
-        - name: airflow-logs
+          subPath: daq/prod/airflow/plugins
+        - name: airflow-root
           mountPath: /usr/local/airflow/logs
+          subPath: daq/prod/airflow/logs
         - name: exp
-          mountPath: /gpfs/slac/cryo/fs1/exp/
-        #- name: sdf-exp
-        #  mountPath: /sdf/group/cryoem/exp/
+          mountPath: /sdf/group/cryoem/exp/
       volumes:
-      - name: airflow-dags
+      - name: airflow-root
         persistentVolumeClaim:
-          claimName: cryoem-daq-prod--sdf-dags
-      - name: airflow-plugins
-        persistentVolumeClaim:
-          claimName: cryoem-daq-prod--sdf-plugins
-      - name: airflow-logs
-        persistentVolumeClaim:
-          claimName: cryoem-daq-prod--sdf-logs
+          claimName: sdf-group-cryoem
       - name: exp
         persistentVolumeClaim:
-          claimName: cryoem-daq-prod--exp
+          claimName: cryoem-daq-exp
       #- name: sdf-exp
       #  persistentVolumeClaim:
       #    claimName: cryoem-daq-prod--sdf-exp
