@@ -46,37 +46,9 @@ spec:
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: cryoem-daq-tem1-gainrefs
-spec:
-  storageClassName: srv-cryoem-tem1-gainrefs
-  accessModes:
-    - "ReadWriteMany"
-  resources:
-    requests:
-      storage: 20Gi
-
----
-
-kind: PersistentVolumeClaim
-apiVersion: v1
-metadata:
   name: cryoem-daq-tem2
 spec:
   storageClassName: srv-cryoem-tem2
-  accessModes:
-    - "ReadWriteMany"
-  resources:
-    requests:
-      storage: 20Gi
-
----
-
-kind: PersistentVolumeClaim
-apiVersion: v1
-metadata:
-  name: cryoem-daq-tem2-gainrefs
-spec:
-  storageClassName: srv-cryoem-tem2-gainrefs
   accessModes:
     - "ReadWriteMany"
   resources:
@@ -102,37 +74,9 @@ spec:
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: cryoem-daq-tem3-gainrefs
-spec:
-  storageClassName: srv-cryoem-tem3
-  accessModes:
-    - "ReadWriteMany"
-  resources:
-    requests:
-      storage: 20Gi
-
----
-
-kind: PersistentVolumeClaim
-apiVersion: v1
-metadata:
   name: cryoem-daq-tem4
 spec:
   storageClassName: srv-cryoem-tem4
-  accessModes:
-    - "ReadWriteMany"
-  resources:
-    requests:
-      storage: 20Gi
-
----
-
-kind: PersistentVolumeClaim
-apiVersion: v1
-metadata:
-  name: cryoem-daq-tem4-gainrefs
-spec:
-  storageClassName: srv-cryoem-tem4-gainrefs
   accessModes:
     - "ReadWriteMany"
   resources:
@@ -172,20 +116,6 @@ spec:
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: cryoem-daq-tembeta-gainrefs
-spec:
-  storageClassName: srv-cryoem-tembeta-gainrefs
-  accessModes:
-    - "ReadWriteMany"
-  resources:
-    requests:
-      storage: 20Gi
-
----
-
-kind: PersistentVolumeClaim
-apiVersion: v1
-metadata:
   name: cryoem-daq-temgamma
 spec:
   storageClassName: srv-cryoem-temgamma
@@ -196,16 +126,4 @@ spec:
       storage: 20Gi
 
 ---
-
-kind: PersistentVolumeClaim
-apiVersion: v1
-metadata:
-  name: cryoem-daq-temgamma-gainrefs
-spec:
-  storageClassName: srv-cryoem-temgamma-gainrefs
-  accessModes:
-    - "ReadWriteMany"
-  resources:
-    requests:
-      storage: 20Gi
 

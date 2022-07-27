@@ -27,32 +27,18 @@ spec:
           mountPath: /sdf/group/cryoem/exp/
         - name: tem1
           mountPath: /srv/cryoem/tem1
-        - name: tem1-gainrefs
-          mountPath: /srv/cryoem/tem1-gainrefs
         - name: tem2
           mountPath: /srv/cryoem/tem2
-        - name: tem2-gainrefs
-          mountPath: /srv/cryoem/tem2-gainrefs
         - name: tem3
           mountPath: /srv/cryoem/tem3
-        - name: tem3-gainrefs
-          mountPath: /srv/cryoem/tem3-gainrefs
         - name: tem4
           mountPath: /srv/cryoem/tem4
-        - name: tem4-gainrefs
-          mountPath: /srv/cryoem/tem4-gainrefs
         - name: temalpha
           mountPath: /srv/cryoem/temalpha
-        - name: temalpha-gainrefs
-          mountPath: /srv/cryoem/temalpha-gainrefs
         - name: tembeta
           mountPath: /srv/cryoem/tembeta
-        - name: tembeta-gainrefs
-          mountPath: /srv/cryoem/tembeta-gainrefs
         - name: temgamma
           mountPath: /srv/cryoem/temgamma
-        - name: temgamma-gainrefs
-          mountPath: /srv/cryoem/temgamma-gainrefs
         - name: fib1
           mountPath: /srv/cryoem/fib1
       volumes:
@@ -71,45 +57,24 @@ spec:
       - name: tem1
         persistentVolumeClaim:
           claimName: cryoem-daq-tem1
-      - name: tem1-gainrefs
-        persistentVolumeClaim:
-          claimName: cryoem-daq-tem1-gainrefs
       - name: tem2
         persistentVolumeClaim:
           claimName: cryoem-daq-tem2
-      - name: tem2-gainrefs
-        persistentVolumeClaim:
-          claimName: cryoem-daq-tem2-gainrefs
       - name: tem3
         persistentVolumeClaim:
           claimName: cryoem-daq-tem3
-      - name: tem3-gainrefs
-        persistentVolumeClaim:
-          claimName: cryoem-daq-tem3-gainrefs
       - name: tem4
         persistentVolumeClaim:
           claimName: cryoem-daq-tem4
-      - name: tem4-gainrefs
-        persistentVolumeClaim:
-          claimName: cryoem-daq-tem4-gainrefs
       - name: temalpha
         persistentVolumeClaim:
           claimName: cryoem-daq-temalpha
-      - name: temalpha-gainrefs
-        persistentVolumeClaim:
-          claimName: cryoem-daq-temalpha-gainrefs
       - name: tembeta
         persistentVolumeClaim:
           claimName: cryoem-daq-tembeta
-      - name: tembeta-gainrefs
-        persistentVolumeClaim:
-          claimName: cryoem-daq-tembeta-gainrefs
       - name: temgamma
         persistentVolumeClaim:
           claimName: cryoem-daq-temgamma
-      - name: temgamma-gainrefs
-        persistentVolumeClaim:
-          claimName: cryoem-daq-temgamma-gainrefs
       - name: fib1
         persistentVolumeClaim:
           claimName: cryoem-daq-fib1
