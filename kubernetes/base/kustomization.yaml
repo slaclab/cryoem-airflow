@@ -1,15 +1,8 @@
 #namespace: cryoem-daq-dev
 
 resources:
-- database.yaml
 - messagebus.yaml
 - webserver.yaml
-#- cockroachdb-storage.yaml
-#- cockroachdb.yaml
-#- postdock-storage.yaml
-#- postdock.yaml
-#- postdock-pgpool.yaml
-#- test.yaml
 - workers.yaml
 - scheduler.yaml
 

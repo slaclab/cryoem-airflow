@@ -6,13 +6,25 @@ spec:
   replicas: 1 
   template:
     spec:
+      containers:
+      - name: scheduler
+        env:
+        - name: AIRFLOW_ADMIN_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: www
+              key: airflow-admin-password
+        volumeMounts:
+        - name: airflow-root
+          mountPath: /usr/local/airflow/dags
+          subPath: daq/prod/airflow/dags
+        - name: airflow-root
+          mountPath: /usr/local/airflow/plugins
+          subPath: daq/prod/airflow/plugins
+        - name: airflow-root
+          mountPath: /usr/local/airflow/logs
+          subPath: daq/prod/airflow/logs
       volumes:
-      - name: airflow-dags
+      - name: airflow-root
         persistentVolumeClaim:
-          claimName: cryoem-daq--prod--sdf-dags
-      - name: airflow-plugins
-        persistentVolumeClaim:
-          claimName: cryoem-daq--prod--sdf-plugins
-      - name: airflow-logs
-        persistentVolumeClaim:
-          claimName: cryoem-daq--prod--sdf-logs
+          claimName: sdf-group-cryoem

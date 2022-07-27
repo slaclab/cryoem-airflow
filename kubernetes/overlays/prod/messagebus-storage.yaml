@@ -1,48 +1,12 @@
 ---
 
-kind: PersistentVolume
+kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: cryoem-daq--prod--redis-0
-  labels:
-    type: local
+  name: cryoem-daq-redis
 spec:
-  storageClassName: cryoem-daq--prod--redis
-  capacity:
-    storage: 5Gi
   accessModes:
-    - ReadWriteOnce
-  local:
-    path: /data/cryoem-daq--prod/redis-0/
-  nodeAffinity:
-    required:
-      nodeSelectorTerms:
-      - matchExpressions:
-        - key: kubernetes.io/hostname 
-          operator: In
-          values:
-          - neb0007.slac.stanford.edu
-
----
-kind: PersistentVolume
-apiVersion: v1
-metadata:
-  name: cryoem-daq--prod--sdf-redis-0
-  labels:
-    type: local
-spec:
-  storageClassName: cryoem-daq--prod--sdf-redis
-  capacity:
-    storage: 5Gi
-  accessModes:
-    - ReadWriteOnce
-  local:
-    path: /sdf/group/cryoem/daq/prod/redis/
-  nodeAffinity:
-    required:
-      nodeSelectorTerms:
-      - matchExpressions:
-        - key: storage/sdf
-          operator: In
-          values:
-          - 'true'
+  - "ReadWriteOnce"
+  resources:
+    requests:
+      storage: 2Gi

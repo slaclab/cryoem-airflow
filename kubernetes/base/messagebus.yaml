@@ -43,14 +43,13 @@ spec:
         volumeMounts:
         - name: redis-data
           mountPath: /data
-  volumeClaimTemplates:
-  - metadata:
-      name: redis-data
-    spec:
-      accessModes: [ "ReadWriteOnce" ]
-      storageClassName: cryoem-daq-prod--redis
-      #storageClassName: cryoem-daq-dev--redis
-      resources:
-        requests:
-          storage: 5Gi
-
+#  volumeClaimTemplates:
+#  - metadata:
+#      name: redis-data
+#    spec:
+#      accessModes: [ "ReadWriteOnce" ]
+#      storageClassName: cryoem-daq-prod--redis
+#      #storageClassName: cryoem-daq-dev--redis
+#      resources:
+#        requests:
+#          storage: 5Gi

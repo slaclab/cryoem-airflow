@@ -4,7 +4,7 @@ kind: Deployment
 metadata:
   name: worker-temalpha
 spec:
-  replicas: 0 
+  replicas: 1 
   selector:
     matchLabels:
       role: worker
@@ -27,11 +27,11 @@ spec:
         #fsGroup:
       containers:
       - name: worker-temalpha
-        image: slaclab/cryoem-airflow:20200317.0
+        image: slaclab/cryoem-airflow:20220722.0
         imagePullPolicy: Always
         env:
         - name: AIRFLOW_MODE
-          value: "worker -q dtn-temalpha"
+          value: "celery worker -q dtn-temalpha"
         - name: POSTGRES_SERVICE_HOST
           valueFrom:
             configMapKeyRef:
@@ -54,11 +54,11 @@ spec:
               key: database
         - name: REDIS_SERVICE_HOST
           value: redis
-        - name: REDIS_CONFIG
+        - name: REDIS_PASSWORD
           valueFrom:
             secretKeyRef:
+              key: password
               name: redis
-              key: redis-config
         - name: FERNET_KEY
           valueFrom:
             secretKeyRef:
@@ -71,36 +71,31 @@ spec:
             mountPath: /usr/local/airflow/plugins
           - name: airflow-logs
             mountPath: /usr/local/airflow/logs
-          #- name: exp
-          #  mountPath: /gpfs/slac/cryo/fs1/exp/
-          - name: sdf-exp
-            mountPath: /sdf/group/cryoem/exp/
+          - name: exp
+            mountPath: /lscratch/cryoem-daq/exp/
           - name: temalpha
-            mountPath: /srv/cryoem/temalpha
+            mountPath: /lscratch/cryoem-daq/srv/cryoem/temalpha
           #- name: temalpha-gainrefs
           #  mountPath: /srv/cryoem/temalpha-gainrefs
       volumes:
         - name: airflow-dags
           persistentVolumeClaim:
-            claimName: cryoem-daq-prod--sdf-dags
+            claimName: cryoem-daq--dags
         - name: airflow-plugins
           persistentVolumeClaim:
-            claimName: cryoem-daq-prod--sdf-plugins
+            claimName: cryoem-daq--plugins
         - name: airflow-logs
           persistentVolumeClaim:
-            claimName: cryoem-daq-prod--sdf-logs
-        #- name: exp
-        #  persistentVolumeClaim:
-        #    claimName: cryoem-daq-prod--exp
-        - name: sdf-exp
+            claimName: cryoem-daq--logs
+        - name: exp
           persistentVolumeClaim:
-            claimName: cryoem-daq-prod--sdf-exp
+            claimName: cryoem-daq--exp
         - name: temalpha
           persistentVolumeClaim:
-            claimName: cryoem-daq-prod--temalpha
+            claimName: cryoem-daq--temalpha
         #- name: temalpha-gainrefs
         #  persistentVolumeClaim:
-        #    claimName: cryoem-daq-prod--temalpha-gainrefs
+        #    claimName: cryoem-daq-temalpha-gainrefs
 
 
 ---
@@ -109,7 +104,7 @@ kind: Deployment
 metadata:
   name: worker-tembeta
 spec:
-  replicas: 0
+  replicas: 1
   selector:
     matchLabels:
       role: worker
@@ -132,11 +127,11 @@ spec:
         #fsGroup:
       containers:
       - name: worker-tembeta
-        image: slaclab/cryoem-airflow:20200317.0
+        image: slaclab/cryoem-airflow:20220722.0
         imagePullPolicy: Always
         env:
         - name: AIRFLOW_MODE
-          value: "worker -q dtn-tembeta"
+          value: "celery worker -q dtn-tembeta"
         - name: POSTGRES_SERVICE_HOST
           valueFrom:
             configMapKeyRef:
@@ -159,11 +154,11 @@ spec:
               key: database
         - name: REDIS_SERVICE_HOST
           value: redis
-        - name: REDIS_CONFIG
+        - name: REDIS_PASSWORD
           valueFrom:
             secretKeyRef:
               name: redis
-              key: redis-config
+              key: password
         - name: FERNET_KEY
           valueFrom:
             secretKeyRef:
@@ -176,36 +171,31 @@ spec:
             mountPath: /usr/local/airflow/plugins
           - name: airflow-logs
             mountPath: /usr/local/airflow/logs
-          #- name: exp
-          #  mountPath: /gpfs/slac/cryo/fs1/exp/
-          - name: sdf-exp
-            mountPath: /sdf/group/cryoem/exp/
+          - name: exp
+            mountPath: /lscratch/cryoem-daq/cryoem/exp/
           - name: tembeta
-            mountPath: /srv/cryoem/tembeta
+            mountPath: /lscratch/cryoem-daq/srv/cryoem/tembeta
           - name: tembeta-gainrefs
-            mountPath: /srv/cryoem/tembeta-gainrefs
+            mountPath: /lscratch/cryoem-daq/srv/cryoem/tembeta-gainrefs
       volumes:
         - name: airflow-dags
           persistentVolumeClaim:
-            claimName: cryoem-daq-prod--sdf-dags
+            claimName: cryoem-daq-dags
         - name: airflow-plugins
           persistentVolumeClaim:
-            claimName: cryoem-daq-prod--sdf-plugins
+            claimName: cryoem-daq-plugins
         - name: airflow-logs
           persistentVolumeClaim:
-            claimName: cryoem-daq-prod--sdf-logs
-        #- name: exp
-        #  persistentVolumeClaim:
-        #    claimName: cryoem-daq-prod--exp
-        - name: sdf-exp
+            claimName: cryoem-daq-logs
+        - name: exp
           persistentVolumeClaim:
-            claimName: cryoem-daq-prod--sdf-exp
+            claimName: cryoem-daq-exp
         - name: tembeta
           persistentVolumeClaim:
-            claimName: cryoem-daq-prod--tembeta
+            claimName: cryoem-daq-tembeta
         - name: tembeta-gainrefs
           persistentVolumeClaim:
-            claimName: cryoem-daq-prod--tembeta-gainrefs
+            claimName: cryoem-daq-tembeta-gainrefs
 
 ---
 apiVersion: apps/v1
@@ -213,7 +203,7 @@ kind: Deployment
 metadata:
   name: worker-temgamma
 spec:
-  replicas: 0
+  replicas: 1
   selector:
     matchLabels:
       role: worker
@@ -236,11 +226,11 @@ spec:
         #fsGroup:
       containers:
       - name: worker-temgamma
-        image: slaclab/cryoem-airflow:20200317.0
+        image: slaclab/cryoem-airflow:20220722.0
         imagePullPolicy: Always
         env:
         - name: AIRFLOW_MODE
-          value: "worker -q dtn-temgamma"
+          value: "celery worker -q dtn-temgamma"
         - name: POSTGRES_SERVICE_HOST
           valueFrom:
             configMapKeyRef:
@@ -263,11 +253,11 @@ spec:
               key: database
         - name: REDIS_SERVICE_HOST
           value: redis
-        - name: REDIS_CONFIG
+        - name: REDIS_PASSWORD
           valueFrom:
             secretKeyRef:
               name: redis
-              key: redis-config
+              key: password
         - name: FERNET_KEY
           valueFrom:
             secretKeyRef:
@@ -280,36 +270,31 @@ spec:
             mountPath: /usr/local/airflow/plugins
           - name: airflow-logs
             mountPath: /usr/local/airflow/logs
-          #- name: exp
-          #  mountPath: /gpfs/slac/cryo/fs1/exp/
-          - name: sdf-exp
-            mountPath: /sdf/group/cryoem/exp/
+          - name: exp
+            mountPath: /lscratch/cryoem-daq/exp/
           - name: temgamma
-            mountPath: /srv/cryoem/temgamma
+            mountPath: /lscratch/cryoem-daq/srv/cryoem/temgamma
           - name: temgamma-gainrefs
-            mountPath: /srv/cryoem/temgamma-gainrefs
+            mountPath: /lscratch/cryoem-daq/srv/cryoem/temgamma-gainrefs
       volumes:
         - name: airflow-dags
           persistentVolumeClaim:
-            claimName: cryoem-daq-prod--sdf-dags
+            claimName: cryoem-daq-dags
         - name: airflow-plugins
           persistentVolumeClaim:
-            claimName: cryoem-daq-prod--sdf-plugins
+            claimName: cryoem-daq-plugins
         - name: airflow-logs
           persistentVolumeClaim:
-            claimName: cryoem-daq-prod--sdf-logs
-        #- name: exp
-        #  persistentVolumeClaim:
-        #    claimName: cryoem-daq-prod--exp
-        - name: sdf-exp
+            claimName: cryoem-daq-logs
+        - name: exp
           persistentVolumeClaim:
-            claimName: cryoem-daq-prod--sdf-exp
+            claimName: cryoem-daq-exp
         - name: temgamma
           persistentVolumeClaim:
-            claimName: cryoem-daq-prod--temgamma
+            claimName: cryoem-daq-temgamma
         - name: temgamma-gainrefs
           persistentVolumeClaim:
-            claimName: cryoem-daq-prod--temgamma-gainrefs
+            claimName: cryoem-daq-temgamma-gainrefs
 
 ---
 apiVersion: apps/v1
@@ -317,7 +302,7 @@ kind: Deployment
 metadata:
   name: worker-tem3
 spec:
-  replicas: 0 
+  replicas: 1 
   selector:
     matchLabels:
       role: worker
@@ -340,11 +325,11 @@ spec:
         #fsGroup:
       containers:
       - name: worker-tem3
-        image: slaclab/cryoem-airflow:20200317.0
+        image: slaclab/cryoem-airflow:20220722.0
         imagePullPolicy: Always
         env:
         - name: AIRFLOW_MODE
-          value: "worker -q dtn-tem3"
+          value: "celery worker -q dtn-tem3"
         - name: POSTGRES_SERVICE_HOST
           valueFrom:
             configMapKeyRef:
@@ -367,11 +352,11 @@ spec:
               key: database
         - name: REDIS_SERVICE_HOST
           value: redis
-        - name: REDIS_CONFIG
+        - name: REDIS_PASSWORD
           valueFrom:
             secretKeyRef:
               name: redis
-              key: redis-config
+              key: password 
         - name: FERNET_KEY
           valueFrom:
             secretKeyRef:
@@ -384,36 +369,31 @@ spec:
             mountPath: /usr/local/airflow/plugins
           - name: airflow-logs
             mountPath: /usr/local/airflow/logs
-          #- name: exp
-          #  mountPath: /gpfs/slac/cryo/fs1/exp/
-          - name: sdf-exp
-            mountPath: /sdf/group/cryoem/exp/
+          - name: exp
+            mountPath: /lscratch/cryoem-daq/cryoem/exp/
           - name: tem3
-            mountPath: /srv/cryoem/tem3
+            mountPath: /lscratch/cryoem-daq/srv/cryoem/tem3
           - name: tem3-gainrefs
-            mountPath: /srv/cryoem/tem3-gainrefs
+            mountPath: /lscratch/cryoem-daq/srv/cryoem/tem3-gainrefs
       volumes:
         - name: airflow-dags
           persistentVolumeClaim:
-            claimName: cryoem-daq-prod--sdf-dags
+            claimName: cryoem-daq-dags
         - name: airflow-plugins
           persistentVolumeClaim:
-            claimName: cryoem-daq-prod--sdf-plugins
+            claimName: cryoem-daq-plugins
         - name: airflow-logs
           persistentVolumeClaim:
-            claimName: cryoem-daq-prod--sdf-logs
-        #- name: exp
-        #  persistentVolumeClaim:
-        #    claimName: cryoem-daq-prod--exp
-        - name: sdf-exp
+            claimName: cryoem-daq-logs
+        - name: exp
           persistentVolumeClaim:
-            claimName: cryoem-daq-prod--sdf-exp
+            claimName: cryoem-daq-exp
         - name: tem3
           persistentVolumeClaim:
-            claimName: cryoem-daq-prod--tem3
+            claimName: cryoem-daq-tem3
         - name: tem3-gainrefs
           persistentVolumeClaim:
-            claimName: cryoem-daq-prod--tem3-gainrefs
+            claimName: cryoem-daq-tem3-gainrefs
 
 
 ---
@@ -424,7 +404,7 @@ kind: Deployment
 metadata:
   name: worker-tem2
 spec:
-  replicas: 0
+  replicas: 1 
   selector:
     matchLabels:
       role: worker
@@ -447,11 +427,11 @@ spec:
         #fsGroup:
       containers:
       - name: worker-tem2
-        image: slaclab/cryoem-airflow:20200317.0
+        image: slaclab/cryoem-airflow:20220722.0
         imagePullPolicy: Always
         env:
         - name: AIRFLOW_MODE
-          value: "worker -q dtn-tem2"
+          value: "celery worker -q dtn-tem2"
         - name: POSTGRES_SERVICE_HOST
           valueFrom:
             configMapKeyRef:
@@ -474,11 +454,11 @@ spec:
               key: database
         - name: REDIS_SERVICE_HOST
           value: redis
-        - name: REDIS_CONFIG
+        - name: REDIS_PASSWORD
           valueFrom:
             secretKeyRef:
               name: redis
-              key: redis-config
+              key: password
         - name: FERNET_KEY
           valueFrom:
             secretKeyRef:
@@ -491,36 +471,31 @@ spec:
             mountPath: /usr/local/airflow/plugins
           - name: airflow-logs
             mountPath: /usr/local/airflow/logs
-          #- name: exp
-          #  mountPath: /gpfs/slac/cryo/fs1/exp/
-          - name: sdf-exp
-            mountPath: /sdf/group/cryoem/exp/
+          - name: exp
+            mountPath: /lscratch/cryoem-daq/cryoem/exp/
           - name: tem2
-            mountPath: /srv/cryoem/tem2
+            mountPath: /lscratch/cryoem-daq/srv/cryoem/tem2
           - name: tem2-gainrefs
-            mountPath: /srv/cryoem/tem2-gainrefs
+            mountPath: /lscratch/cryoem-daq/srv/cryoem/tem2-gainrefs
       volumes:
         - name: airflow-dags
           persistentVolumeClaim:
-            claimName: cryoem-daq-prod--sdf-dags
+            claimName: cryoem-daq-dags
         - name: airflow-plugins
           persistentVolumeClaim:
-            claimName: cryoem-daq-prod--sdf-plugins
+            claimName: cryoem-daq-plugins
         - name: airflow-logs
           persistentVolumeClaim:
-            claimName: cryoem-daq-prod--sdf-logs
-        #- name: exp
-        #  persistentVolumeClaim:
-        #    claimName: cryoem-daq-prod--exp
-        - name: sdf-exp
+            claimName: cryoem-daq-logs
+        - name: exp
           persistentVolumeClaim:
-            claimName: cryoem-daq-prod--sdf-exp
+            claimName: cryoem-daq-exp
         - name: tem2
           persistentVolumeClaim:
-            claimName: cryoem-daq-prod--tem2
+            claimName: cryoem-daq-tem2
         - name: tem2-gainrefs
           persistentVolumeClaim:
-            claimName: cryoem-daq-prod--tem2-gainrefs
+            claimName: cryoem-daq-tem2-gainrefs
 
 
 ---
@@ -532,7 +507,7 @@ kind: Deployment
 metadata:
   name: worker-tem1
 spec:
-  replicas: 0
+  replicas: 1
   selector:
     matchLabels:
       role: worker
@@ -555,11 +530,11 @@ spec:
         #fsGroup:
       containers:
       - name: worker-tem1
-        image: slaclab/cryoem-airflow:20200317.0
+        image: slaclab/cryoem-airflow:20220722.0
         imagePullPolicy: Always
         env:
         - name: AIRFLOW_MODE
-          value: "worker -q dtn-tem1"
+          value: "celery worker -q dtn-tem1"
         - name: POSTGRES_SERVICE_HOST
           valueFrom:
             configMapKeyRef:
@@ -582,11 +557,11 @@ spec:
               key: database
         - name: REDIS_SERVICE_HOST
           value: redis
-        - name: REDIS_CONFIG
+        - name: REDIS_PASSWORD
           valueFrom:
             secretKeyRef:
               name: redis
-              key: redis-config
+              key: password
         - name: FERNET_KEY
           valueFrom:
             secretKeyRef:
@@ -599,36 +574,34 @@ spec:
             mountPath: /usr/local/airflow/plugins
           - name: airflow-logs
             mountPath: /usr/local/airflow/logs
-          #- name: exp
-          #  mountPath: /gpfs/slac/cryo/fs1/exp/
-          - name: sdf-exp
-            mountPath: /sdf/group/cryoem/exp/
+          - name: exp
+            mountPath: /lscratch/cryoem-daq/cryoem/exp/
           - name: tem1
-            mountPath: /srv/cryoem/tem1
+            mountPath: /lscratch/cryoem-daq/srv/cryoem/tem1
           - name: tem1-gainrefs
-            mountPath: /srv/cryoem/tem1-gainrefs
+            mountPath: /lscratch/cryoem-daq/srv/cryoem/tem1-gainrefs
       volumes:
         - name: airflow-dags
           persistentVolumeClaim:
-            claimName: cryoem-daq-prod--sdf-dags
+            #claimName: cryoem-daq-dags
+            claimName: sdf-group-cryoem
         - name: airflow-plugins
           persistentVolumeClaim:
-            claimName: cryoem-daq-prod--sdf-plugins
+            #claimName: cryoem-daq-plugins
+            claimName: sdf-group-cryoem
         - name: airflow-logs
           persistentVolumeClaim:
-            claimName: cryoem-daq-prod--sdf-logs
-        #- name: exp
-        #  persistentVolumeClaim:
-        #    claimName: cryoem-daq-prod--exp
-        - name: sdf-exp
+            #claimName: cryoem-daq-logs
+            claimName: sdf-group-cryoem
+        - name: exp
           persistentVolumeClaim:
-            claimName: cryoem-daq-prod--sdf-exp
+            claimName: cryoem-daq-exp
         - name: tem1
           persistentVolumeClaim:
-            claimName: cryoem-daq-prod--tem1
+            claimName: cryoem-daq-tem1
         - name: tem1-gainrefs
           persistentVolumeClaim:
-            claimName: cryoem-daq-prod--tem1-gainrefs
+            claimName: cryoem-daq-tem1-gainrefs
 
 ---
 
@@ -639,7 +612,7 @@ kind: Deployment
 metadata:
   name: worker-tem4
 spec:
-  replicas: 0
+  replicas: 1 
   selector:
     matchLabels:
       role: worker
@@ -662,11 +635,11 @@ spec:
         #fsGroup:
       containers:
       - name: worker-tem4
-        image: slaclab/cryoem-airflow:20200317.0
+        image: slaclab/cryoem-airflow:20220722.0
         imagePullPolicy: Always
         env:
         - name: AIRFLOW_MODE
-          value: "worker -q dtn-tem4"
+          value: "celery worker -q dtn-tem4"
         - name: POSTGRES_SERVICE_HOST
           valueFrom:
             configMapKeyRef:
@@ -689,11 +662,11 @@ spec:
               key: database
         - name: REDIS_SERVICE_HOST
           value: redis
-        - name: REDIS_CONFIG
+        - name: REDIS_PASSWORD
           valueFrom:
             secretKeyRef:
               name: redis
-              key: redis-config
+              key: password
         - name: FERNET_KEY
           valueFrom:
             secretKeyRef:
@@ -706,35 +679,30 @@ spec:
             mountPath: /usr/local/airflow/plugins
           - name: airflow-logs
             mountPath: /usr/local/airflow/logs
-          #- name: exp
-          #  mountPath: /gpfs/slac/cryo/fs1/exp/
-          - name: sdf-exp
-            mountPath: /sdf/group/cryoem/exp/
+          - name: exp
+            mountPath: /lscratch/cryoem-daq/exp
           - name: tem4
-            mountPath: /srv/cryoem/tem4
+            mountPath: /lscratch/cryoem-daq/tem4
           - name: tem4-gainrefs
-            mountPath: /srv/cryoem/tem4-gainrefs
+            mountPath: /lscratch/cryoem-daq/tem4-gainrefs
       volumes:
         - name: airflow-dags
           persistentVolumeClaim:
-            claimName: cryoem-daq-prod--sdf-dags
+            claimName: cryoem-daq-dags
         - name: airflow-plugins
           persistentVolumeClaim:
-            claimName: cryoem-daq-prod--sdf-plugins
+            claimName: cryoem-daq-plugins
         - name: airflow-logs
           persistentVolumeClaim:
-            claimName: cryoem-daq-prod--sdf-logs
-        #- name: exp
-        #  persistentVolumeClaim:
-        #    claimName: cryoem-daq-prod--exp
-        - name: sdf-exp
+            claimName: cryoem-daq-logs
+        - name: exp
           persistentVolumeClaim:
-            claimName: cryoem-daq-prod--sdf-exp
+            claimName: cryoem-daq-exp
         - name: tem4
           persistentVolumeClaim:
-            claimName: cryoem-daq-prod--tem4
+            claimName: cryoem-daq-tem4
         - name: tem4-gainrefs
           persistentVolumeClaim:
-            claimName: cryoem-daq-prod--tem4-gainrefs
+            claimName: cryoem-daq-tem4-gainrefs
 
 

@@ -113,9 +113,8 @@ spec:
           valueFrom:
             secretKeyRef:
               name: redis
-              key: password
+              key: redis-password
         - name: FERNET_KEY
-          #value: "46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho="
           valueFrom:
             secretKeyRef:
               name: airflow

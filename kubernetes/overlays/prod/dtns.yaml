@@ -4,7 +4,7 @@ kind: Deployment
 metadata:
   name: dtn-temalpha
 spec:
-  replicas: 3 
+  replicas: 1 
   selector:
     matchLabels:
       role: dtn
@@ -27,7 +27,7 @@ spec:
         #fsGroup:
       containers:
       - name: dtn-temalpha
-        image: slaclab/cryoem-airflow-dtn:20201105.0
+        image: slaclab/cryoem-airflow-dtn:20220519.0
         imagePullPolicy: Always
         #livenessProbe:
         #  httpGet:
@@ -46,35 +46,26 @@ spec:
           value: temalpha
         - name: REDIS_SERVICE_HOST
           value: redis
-        - name: REDIS_CONFIG
+        - name: REDIS_PASSWORD
           valueFrom:
             secretKeyRef:
+              key: password
               name: redis
-              key: redis-config
         - name: SOURCE_DIRECTORY
           value: /srv/cryoem/temalpha
         #- name: DRY_RUN
         #  value: "1"
         volumeMounts:
           - name: exp
-            mountPath: /gpfs/slac/cryo/fs1/exp/
-          - name: sdf-exp
-            mountPath: /sdf/group/cryoem/exp/
+            mountPath: /srv/cryoem/exp/
           - name: temalpha
             mountPath: /srv/cryoem/temalpha
-          #- name: tembeta-gainrefs
-          #  mountPath: /srv/cryoem/tembeta-gainrefs
+          #- name: temalpha-gainrefs
+          #  mountPath: /srv/cryoem/temalpha-gainrefs
       volumes:
         - name: exp
           persistentVolumeClaim:
-            claimName: cryoem-daq-prod--exp
-        - name: sdf-exp
-          persistentVolumeClaim:
-            claimName: cryoem-daq-prod--sdf-exp
+            claimName: cryoem-daq-exp
         - name: temalpha
           persistentVolumeClaim:
-            claimName: cryoem-daq-prod--temalpha
-        #- name: tem4-gainrefs
-        #  persistentVolumeClaim:
-        #    claimName: cryoem-daq-dev--tem4-gainrefs
-
+            claimName: cryoem-daq-temalpha

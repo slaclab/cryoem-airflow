@@ -1,4 +1,4 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: cryoem-daq-prod
+  name: cryoem-daq

@@ -1,4 +1,4 @@
-eapiVersion: apps/v1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: worker
@@ -8,6 +8,14 @@ spec:
     spec:
       containers:
       - name: worker
+        env:
+        - name: AIRFLOW_MODE
+          value: celery worker -q dtn,default
+        - name: REDIS_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: password
+              name: redis
         volumeMounts:
         - name: airflow-dags
           mountPath: /usr/local/airflow/dags
@@ -15,8 +23,6 @@ spec:
           mountPath: /usr/local/airflow/plugins
         - name: airflow-logs
           mountPath: /usr/local/airflow/logs
-        #- name: exp
-        #  mountPath: /gpfs/slac/cryo/fs1/exp/
         - name: sdf-exp
           mountPath: /sdf/group/cryoem/exp/
         - name: tem1
@@ -52,61 +58,58 @@ spec:
       volumes:
       - name: airflow-dags
         persistentVolumeClaim:
-          claimName: cryoem-daq-prod--sdf-dags
+          claimName: cryoem-daq-dags
       - name: airflow-plugins
         persistentVolumeClaim:
-          claimName: cryoem-daq-prod--sdf-plugins
+          claimName: cryoem-daq-plugins
       - name: airflow-logs
         persistentVolumeClaim:
-          claimName: cryoem-daq-prod--sdf-logs
-      #- name: exp
-      #  persistentVolumeClaim:
-      #    claimName: cryoem-daq-prod--exp
+          claimName: cryoem-daq-logs
       - name: sdf-exp
         persistentVolumeClaim:
-          claimName: cryoem-daq-prod--sdf-exp
+          claimName: cryoem-daq-exp
       - name: tem1
         persistentVolumeClaim:
-          claimName: cryoem-daq-prod--tem1
+          claimName: cryoem-daq-tem1
       - name: tem1-gainrefs
         persistentVolumeClaim:
-          claimName: cryoem-daq-prod--tem1-gainrefs
+          claimName: cryoem-daq-tem1-gainrefs
       - name: tem2
         persistentVolumeClaim:
-          claimName: cryoem-daq-prod--tem2
+          claimName: cryoem-daq-tem2
       - name: tem2-gainrefs
         persistentVolumeClaim:
-          claimName: cryoem-daq-prod--tem2-gainrefs
+          claimName: cryoem-daq-tem2-gainrefs
       - name: tem3
         persistentVolumeClaim:
-          claimName: cryoem-daq-prod--tem3
+          claimName: cryoem-daq-tem3
       - name: tem3-gainrefs
         persistentVolumeClaim:
-          claimName: cryoem-daq-prod--tem3-gainrefs
+          claimName: cryoem-daq-tem3-gainrefs
       - name: tem4
         persistentVolumeClaim:
-          claimName: cryoem-daq-prod--tem4
+          claimName: cryoem-daq-tem4
       - name: tem4-gainrefs
         persistentVolumeClaim:
-          claimName: cryoem-daq-prod--tem4-gainrefs
+          claimName: cryoem-daq-tem4-gainrefs
       - name: temalpha
         persistentVolumeClaim:
-          claimName: cryoem-daq-prod--temalpha
+          claimName: cryoem-daq-temalpha
       - name: temalpha-gainrefs
         persistentVolumeClaim:
-          claimName: cryoem-daq-prod--temalpha-gainrefs
+          claimName: cryoem-daq-temalpha-gainrefs
       - name: tembeta
         persistentVolumeClaim:
-          claimName: cryoem-daq-prod--tembeta
+          claimName: cryoem-daq-tembeta
       - name: tembeta-gainrefs
         persistentVolumeClaim:
-          claimName: cryoem-daq-prod--tembeta-gainrefs
+          claimName: cryoem-daq-tembeta-gainrefs
       - name: temgamma
         persistentVolumeClaim:
-          claimName: cryoem-daq-prod--temgamma
+          claimName: cryoem-daq-temgamma
       - name: temgamma-gainrefs
         persistentVolumeClaim:
-          claimName: cryoem-daq-prod--temgamma-gainrefs
+          claimName: cryoem-daq-temgamma-gainrefs
       - name: fib1
         persistentVolumeClaim:
-          claimName: cryoem-daq-prod--fib1
+          claimName: cryoem-daq-fib1

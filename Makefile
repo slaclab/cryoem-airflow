@@ -1,5 +1,5 @@
 TAG ?= latest
-WORKDIR ?= "/gpfs/slac/cryo/fs1/daq/dev/airflow/bin"
+WORKDIR ?= "/scratch/${USER}/.singularity"
 
 server:
 	docker build . -t slaclab/cryoem-airflow:${TAG}

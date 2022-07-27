@@ -1,4 +1,4 @@
-namespace: cryoem-daq--prod
+namespace: cryoem-daq
 
 bases:
 - ../../base
@@ -6,56 +6,70 @@ bases:
 resources:
 - ns.yaml
 - ingress.yaml
-- cryoem-storage.yaml
-- database-storage.yaml
-- messagebus-storage.yaml
 - airflow-storage.yaml
-#- workers.yaml
-#- dtns.yaml
+- cryoem-storage.yaml
+- messagebus-storage.yaml
+- workers.yaml
+- dtns.yaml
+- cnpg-cryoem-airflow-database.yaml
+- endpoints-patch.yaml
 
 patchesStrategicMerge:
-- database-patch.yaml
 - scheduler-patch.yaml
 - webserver-patch.yaml
 - messagebus-patch.yaml
-#- worker-patch.yaml
+- worker-patch.yaml
 
 secretGenerator:
 - name: postgres
+  options:
+    disableNameSuffixHash: true
   files:
-  - etc/root-password
-  - etc/primary-password
-  - etc/password
-  literals:
-  - primary-username=repl
-  - username=airflow
+  - etc/.secrets/root-password
+  - etc/.secrets/primary-username
+  - etc/.secrets/primary-password
+  - etc/.secrets/username
+  - etc/.secrets/password
 - name: redis
+  options:
+    disableNameSuffixHash: true
   files:
-  - password=etc/redis-password
+  - redis-password=etc/.secrets/redis-password
 - name: airflow
+  options:
+    disableNameSuffixHash: true
   files:
-  - etc/fernet-key
+  - etc/.secrets/fernet-key
 - name: www
+  options:
+    disableNameSuffixHash: true
   files:
-  - admin-password=etc/airflow-admin-password
- 
+  - etc/.secrets/airflow-admin-password
+- name: daq-admin
+  options:
+    disableNameSuffixHash: true
+  files:
+  - etc/.secrets/daq-admin-username
+  - etc/.secrets/daq-admin-password
 
 configMapGenerator: 
 - name: postgres
   literals: 
-  - db_url=postgres
+  - db_url=postgres-rw
   - database=airflow
 
 images:
 - name: slaclab/cryoem-airflow
-  # 1.10.9
+  # 1.10.9 (prod)
   #newTag: '20200404.0'
-  # 1.10.15
-  #newTag: '20210917.0' 
+  # 1.10.15 (bridge upgrade)
+  newTag: '20210917.0' 
   # 2.1.3
   #newTag: '20210921.0'
   # 2.1.4
   #newTag: '20211015.2'
-  newTag: '20211027.0'
-- name: slaclab/cryoem-airflow-dtn
-  newTag: '20211015.0'
+  #newTag: '20211027.0'
+- name: slaclab/cryoem-airflow-dtn 
+  #newTag: '20211015.0'
+  # kill zombies
+  newTag: '20220519.0'

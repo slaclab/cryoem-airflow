@@ -1,0 +1,89 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: postgres
+spec:
+  instances: 2
+  primaryUpdateStrategy: unsupervised
+
+  bootstrap:
+    initdb:
+      database: airflow
+      owner: airflow
+      secret:
+        name: postgres
+
+  nodeMaintenanceWindow:
+    inProgress: false
+    reusePVC: true
+
+  postgresql:
+    parameters:
+      shared_buffers: 4GB
+      pg_stat_statements.max: "10000"
+      pg_stat_statements.track: all
+
+  resources:
+    requests:
+      memory: 16Gi
+      cpu: 4
+    limits:
+      memory: 32Gi
+      cpu: 8
+
+  storage:
+    storageClass: wekafs--sdf-k8s01
+    size: 1.5Ti
+
+
+---
+
+apiVersion: postgresql.cnpg.io/v1
+kind: Pooler
+metadata:
+  name: cryoem-daq-pooler-rw
+spec:
+  cluster:
+    name: cryoem-daq
+  instances: 3
+  type: rw
+
+  pgbouncer:
+    poolMode: transaction
+    parameters:
+      max_client_conn: "1000"
+      default_pool_size: "10"
+      log_connections: "1"
+      log_disconnections: "1"
+      idle_transaction_timeout: "0"
+      server_idle_timeout: "0"
+
+  template:
+    metadata:
+      labels:
+        app: pooler
+    
+    spec:
+      containers:
+      - name: pgbouncer
+        resources:
+          requests:
+            cpu: "0.1"
+            memory: 100Mi
+          limits:
+            cpu: "0.5"
+            memory: 500Mi
+
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - pooler
+            topologyKey: "kubernetes.io/hostname"
+
+
+---

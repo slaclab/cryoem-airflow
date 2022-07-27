@@ -71,7 +71,7 @@ spec:
           valueFrom:
             secretKeyRef:
               name: redis
-              key: password
+              key: redis-password
         - name: FERNET_KEY
           valueFrom:
             secretKeyRef:

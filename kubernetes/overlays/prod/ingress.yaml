@@ -1,19 +1,22 @@
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: www
-  #annotations:
-  #  nginx.ingress.kubernetes.io/auth-type: basic
-  #  nginx.ingress.kubernetes.io/auth-secret: www
-  #  nginx.ingress.kubernetes.io/auth-realm: "Authentication Required"
+  annotations:
+    nginx.ingress.kubernetes.io/auth-type: basic
+    nginx.ingress.kubernetes.io/auth-secret: daq-admin
+    nginx.ingress.kubernetes.io/auth-realm: "Authentication Required"
 spec:
   rules:
   - host: cryoem-daq.slac.stanford.edu
     http:
       paths:
-      - backend:
-          serviceName: www
-          servicePort: 8080
+      - pathType: Prefix
+        backend:
+          service:
+            name: www
+            port:
+              number: 8080
         path: /
   #tls:
   #- hosts:

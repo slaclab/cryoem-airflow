@@ -1,624 +1,211 @@
+
 ---
-kind: PersistentVolume
-apiVersion: v1
-metadata:
-  name: cryoem-daq--prod--exp
-  labels:
-    type: local
-spec:
-  storageClassName: cryoem-daq--prod--exp
-  capacity:
-    storage: 20Gi
-  accessModes:
-    - ReadWriteMany
-  local:
-    path: /gpfs/slac/cryo/fs1/exp
-  nodeAffinity:
-    required:
-      nodeSelectorTerms:
-      - matchExpressions:
-        #- key: kubernetes.io/hostname
-        - key: storage/cryoem
-          operator: In
-          values:
-          - 'true'
----
+
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: cryoem-daq--prod--exp
+  name: cryoem-daq-exp
 spec:
-  storageClassName: cryoem-daq--prod--exp
+  storageClassName: sdf-group-cryoem-exp
   accessModes:
     - "ReadWriteMany"
   resources:
     requests:
-      storage: 1Gi
+      storage: 20Gi
 
 ---
-kind: PersistentVolume
-apiVersion: v1
-metadata:
-  name: cryoem-daq--prod--sdf-exp
-  labels:
-    type: local
-spec:
-  storageClassName: cryoem-daq--prod--sdf-exp
-  capacity:
-    storage: 20Gi
-  accessModes:
-    - ReadWriteMany
-  local:
-    path: /sdf/group/cryoem/exp/
-  nodeAffinity:
-    required:
-      nodeSelectorTerms:
-      - matchExpressions:
-        #- key: kubernetes.io/hostname
-        - key: storage/sdf
-          operator: In
-          values:
-          - 'true'
----
+
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: cryoem-daq--prod--sdf-exp
+  name: cryoem-daq-fib1
 spec:
-  storageClassName: cryoem-daq--prod--sdf-exp
+  storageClassName: srv-cryoem-fib1
   accessModes:
     - "ReadWriteMany"
   resources:
     requests:
-      storage: 1Gi
-
+      storage: 20Gi
 
 ---
 
-
-kind: PersistentVolume
-apiVersion: v1
-metadata:
-  name: cryoem-daq--prod--tem1
-  labels:
-    type: local
-spec:
-  storageClassName: cryoem-daq--prod--tem1
-  capacity:
-    storage: 20Gi
-  accessModes:
-    - ReadWriteMany
-  local:
-    path: /srv/cryoem/tem1/
-  nodeAffinity:
-    required:
-      nodeSelectorTerms:
-      - matchExpressions:
-        - key: cryoem/storage-tem1
-          operator: In
-          values:
-          - 'true'
----
-kind: PersistentVolume
-apiVersion: v1
-metadata:
-  name: cryoem-daq--prod--tem1-gainrefs
-  labels:
-    type: local
-spec:
-  storageClassName: cryoem-daq--prod--tem1-gainrefs
-  capacity:
-    storage: 20Gi
-  accessModes:
-    - ReadWriteMany
-  local:
-    path: /srv/cryoem/tem1-gainrefs/
-  nodeAffinity:
-    required:
-      nodeSelectorTerms:
-      - matchExpressions:
-        - key: cryoem/storage-tem1
-          operator: In
-          values:
-          - 'true'
----
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: cryoem-daq--prod--tem1
+  name: cryoem-daq-tem1
 spec:
-  storageClassName: cryoem-daq--prod--tem1
+  storageClassName: srv-cryoem-tem1
   accessModes:
     - "ReadWriteMany"
   resources:
     requests:
-      storage: 1Gi
+      storage: 20Gi
+
 ---
+
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: cryoem-daq--prod--tem1-gainrefs
+  name: cryoem-daq-tem1-gainrefs
 spec:
-  storageClassName: cryoem-daq--prod--tem1-gainrefs
+  storageClassName: srv-cryoem-tem1-gainrefs
   accessModes:
     - "ReadWriteMany"
   resources:
     requests:
-      storage: 1Gi
-
-
----
-
-
-kind: PersistentVolume
-apiVersion: v1
-metadata:
-  name: cryoem-daq--prod--tem2
-  labels:
-    type: local
-spec:
-  storageClassName: cryoem-daq--prod--tem2
-  capacity:
-    storage: 20Gi
-  accessModes:
-    - ReadWriteMany
-  local:
-    path: /srv/cryoem/tem2/
-  nodeAffinity:
-    required:
-      nodeSelectorTerms:
-      - matchExpressions:
-        - key: cryoem/storage-tem2
-          operator: In
-          values:
-          - 'true'
+      storage: 20Gi
 
 ---
 
-kind: PersistentVolume
-apiVersion: v1
-metadata:
-  name: cryoem-daq--prod--tem2-gainrefs
-  labels:
-    type: local
-spec:
-  storageClassName: cryoem-daq--prod--tem2-gainrefs
-  capacity:
-    storage: 20Gi
-  accessModes:
-    - ReadWriteMany
-  local:
-    path: /srv/cryoem/tem2-gainrefs
-  nodeAffinity:
-    required:
-      nodeSelectorTerms:
-      - matchExpressions:
-        - key: cryoem/storage-tem2
-          operator: In
-          values:
-          - 'true'
----
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: cryoem-daq--prod--tem2
+  name: cryoem-daq-tem2
 spec:
-  storageClassName: cryoem-daq--prod--tem2
+  storageClassName: srv-cryoem-tem2
   accessModes:
     - "ReadWriteMany"
   resources:
     requests:
-      storage: 1Gi
+      storage: 20Gi
+
 ---
+
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: cryoem-daq--prod--tem2-gainrefs
+  name: cryoem-daq-tem2-gainrefs
 spec:
-  storageClassName: cryoem-daq--prod--tem2-gainrefs
+  storageClassName: srv-cryoem-tem2-gainrefs
   accessModes:
     - "ReadWriteMany"
   resources:
     requests:
-      storage: 1Gi
+      storage: 20Gi
+
 ---
-kind: PersistentVolume
-apiVersion: v1
-metadata:
-  name: cryoem-daq--prod--tem3
-  labels:
-    type: local
-spec:
-  storageClassName: cryoem-daq--prod--tem3
-  capacity:
-    storage: 20Gi
-  accessModes:
-    - ReadWriteMany
-  local:
-    path: /srv/cryoem/tem3/
-  nodeAffinity:
-    required:
-      nodeSelectorTerms:
-      - matchExpressions:
-        - key: cryoem/storage-tem3
-          operator: In
-          values:
-          - 'true'
----
-kind: PersistentVolume
-apiVersion: v1
-metadata:
-  name: cryoem-daq--prod--tem3-gainrefs
-  labels:
-    type: local
-spec:
-  storageClassName: cryoem-daq--prod--tem3-gainrefs
-  capacity:
-    storage: 20Gi
-  accessModes:
-    - ReadWriteMany
-  local:
-    path: /srv/cryoem/tem3-gainrefs/
-  nodeAffinity:
-    required:
-      nodeSelectorTerms:
-      - matchExpressions:
-        - key: cryoem/storage-tem3
-          operator: In
-          values:
-          - 'true'
----
+
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: cryoem-daq--prod--tem3
+  name: cryoem-daq-tem3
 spec:
-  storageClassName: cryoem-daq--prod--tem3
+  storageClassName: srv-cryoem-tem3
   accessModes:
     - "ReadWriteMany"
   resources:
     requests:
-      storage: 1Gi
+      storage: 20Gi
+
 ---
+
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: cryoem-daq--prod--tem3-gainrefs
+  name: cryoem-daq-tem3-gainrefs
 spec:
-  storageClassName: cryoem-daq--prod--tem3-gainrefs
+  storageClassName: srv-cryoem-tem3
   accessModes:
     - "ReadWriteMany"
   resources:
     requests:
-      storage: 1Gi
+      storage: 20Gi
 
 ---
 
-kind: PersistentVolume
-apiVersion: v1
-metadata:
-  name: cryoem-daq--prod--tem4
-  labels:
-    type: local
-spec:
-  storageClassName: cryoem-daq--prod--tem4
-  capacity:
-    storage: 20Gi
-  accessModes:
-    - ReadWriteMany
-  local:
-    path: /srv/cryoem/tem4/
-  nodeAffinity:
-    required:
-      nodeSelectorTerms:
-      - matchExpressions:
-        - key: cryoem/storage-tem4
-          operator: In
-          values:
-          - 'true'
----
-kind: PersistentVolume
-apiVersion: v1
-metadata:
-  name: cryoem-daq--prod--tem4-gainrefs
-  labels:
-    type: local
-spec:
-  storageClassName: cryoem-daq--prod--tem4-gainrefs
-  capacity:
-    storage: 20Gi
-  accessModes:
-    - ReadWriteMany
-  local:
-    path: /srv/cryoem/tem4-gainrefs/
-  nodeAffinity:
-    required:
-      nodeSelectorTerms:
-      - matchExpressions:
-        - key: cryoem/storage-tem4
-          operator: In
-          values:
-          - 'true'
----
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: cryoem-daq--prod--tem4
+  name: cryoem-daq-tem4
 spec:
-  storageClassName: cryoem-daq--prod--tem4
+  storageClassName: srv-cryoem-tem4
   accessModes:
     - "ReadWriteMany"
   resources:
     requests:
-      storage: 1Gi
+      storage: 20Gi
+
 ---
+
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: cryoem-daq--prod--tem4-gainrefs
+  name: cryoem-daq-tem4-gainrefs
 spec:
-  storageClassName: cryoem-daq--prod--tem4-gainrefs
+  storageClassName: srv-cryoem-tem4-gainrefs
   accessModes:
     - "ReadWriteMany"
   resources:
     requests:
-      storage: 1Gi
+      storage: 20Gi
+
 ---
 
-
-kind: PersistentVolume
-apiVersion: v1
-metadata:
-  name: cryoem-daq--prod--tembeta
-  labels:
-    type: local
-spec:
-  storageClassName: cryoem-daq--prod--tembeta
-  capacity:
-    storage: 20Gi
-  accessModes:
-    - ReadWriteMany
-  local:
-    path: /srv/cryoem/tembeta/
-  nodeAffinity:
-    required:
-      nodeSelectorTerms:
-      - matchExpressions:
-        - key: cryoem/storage-tembeta
-          operator: In
-          values:
-          - 'true'
----
-kind: PersistentVolume
-apiVersion: v1
-metadata:
-  name: cryoem-daq--prod--tembeta-gainrefs
-  labels:
-    type: local
-spec:
-  storageClassName: cryoem-daq--prod--tembeta-gainrefs
-  capacity:
-    storage: 20Gi
-  accessModes:
-    - ReadWriteMany
-  local:
-    path: /srv/cryoem/tembeta-gainrefs/
-  nodeAffinity:
-    required:
-      nodeSelectorTerms:
-      - matchExpressions:
-        - key: cryoem/storage-tembeta
-          operator: In
-          values:
-          - 'true'
----
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: cryoem-daq--prod--tembeta
+  name: cryoem-daq-temalpha
 spec:
-  storageClassName: cryoem-daq--prod--tembeta
+  storageClassName: srv-cryoem-temalpha
   accessModes:
     - "ReadWriteMany"
   resources:
     requests:
-      storage: 1Gi
+      storage: 20Gi
+
 ---
+
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: cryoem-daq--prod--tembeta-gainrefs
+  name: cryoem-daq-tembeta
 spec:
-  storageClassName: cryoem-daq--prod--tembeta-gainrefs
+  storageClassName: srv-cryoem-tembeta
   accessModes:
     - "ReadWriteMany"
   resources:
     requests:
-      storage: 1Gi
-
+      storage: 20Gi
 
 ---
 
-
-kind: PersistentVolume
-apiVersion: v1
-metadata:
-  name: cryoem-daq--prod--temalpha
-  labels:
-    type: local
-spec:
-  storageClassName: cryoem-daq--prod--temalpha
-  capacity:
-    storage: 20Gi
-  accessModes:
-    - ReadWriteMany
-  local:
-    path: /srv/cryoem/temalpha
-  nodeAffinity:
-    required:
-      nodeSelectorTerms:
-      - matchExpressions:
-        - key: cryoem/storage-temalpha
-          operator: In
-          values:
-          - 'true'
----
-kind: PersistentVolume
-apiVersion: v1
-metadata:
-  name: cryoem-daq--prod--temalpha-gainrefs
-  labels:
-    type: local
-spec:
-  storageClassName: cryoem-daq--prod--temalpha-gainrefs
-  capacity:
-    storage: 20Gi
-  accessModes:
-    - ReadWriteMany
-  local:
-    path: /srv/cryoem/temalpha-gainrefs/
-  nodeAffinity:
-    required:
-      nodeSelectorTerms:
-      - matchExpressions:
-        - key: cryoem/storage-temalpha
-          operator: In
-          values:
-          - 'true'
----
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: cryoem-daq--prod--temalpha
+  name: cryoem-daq-tembeta-gainrefs
 spec:
-  storageClassName: cryoem-daq--prod--temalpha
+  storageClassName: srv-cryoem-tembeta-gainrefs
   accessModes:
     - "ReadWriteMany"
   resources:
     requests:
-      storage: 1Gi
+      storage: 20Gi
+
 ---
+
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: cryoem-daq--prod--temalpha-gainrefs
+  name: cryoem-daq-temgamma
 spec:
-  storageClassName: cryoem-daq--prod--temalpha-gainrefs
+  storageClassName: srv-cryoem-temgamma
   accessModes:
     - "ReadWriteMany"
   resources:
     requests:
-      storage: 1Gi
-
-
+      storage: 20Gi
 
 ---
 
-
-kind: PersistentVolume
-apiVersion: v1
-metadata:
-  name: cryoem-daq--prod--fib1
-  labels:
-    type: local
-spec:
-  storageClassName: cryoem-daq--prod--fib1
-  capacity:
-    storage: 20Gi
-  accessModes:
-    - ReadWriteMany
-  local:
-    path: /srv/cryoem/fib1
-  nodeAffinity:
-    required:
-      nodeSelectorTerms:
-      - matchExpressions:
-        - key: cryoem/storage-fib1
-          operator: In
-          values:
-          - 'true'
----
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: cryoem-daq--prod--fib1
+  name: cryoem-daq-temgamma-gainrefs
 spec:
-  storageClassName: cryoem-daq--prod--fib1
+  storageClassName: srv-cryoem-temgamma-gainrefs
   accessModes:
     - "ReadWriteMany"
   resources:
     requests:
-      storage: 1Gi
----
-
-
-kind: PersistentVolume
-apiVersion: v1
-metadata:
-  name: cryoem-daq--prod--temgamma
-  labels:
-    type: local
-spec:
-  storageClassName: cryoem-daq--prod--temgamma
-  capacity:
-    storage: 20Gi
-  accessModes:
-    - ReadWriteMany
-  local:
-    path: /srv/cryoem/temgamma/
-  nodeAffinity:
-    required:
-      nodeSelectorTerms:
-      - matchExpressions:
-        - key: cryoem/storage-temgamma
-          operator: In
-          values:
-          - 'true'
----
-kind: PersistentVolume
-apiVersion: v1
-metadata:
-  name: cryoem-daq--prod--temgamma-gainrefs
-  labels:
-    type: local
-spec:
-  storageClassName: cryoem-daq--prod--temgamma-gainrefs
-  capacity:
-    storage: 20Gi
-  accessModes:
-    - ReadWriteMany
-  local:
-    path: /srv/cryoem/temgamma-gainrefs/
-  nodeAffinity:
-    required:
-      nodeSelectorTerms:
-      - matchExpressions:
-        - key: cryoem/storage-temgamma
-          operator: In
-          values:
-          - 'true'
----
-kind: PersistentVolumeClaim
-apiVersion: v1
-metadata:
-  name: cryoem-daq--prod--temgamma
-spec:
-  storageClassName: cryoem-daq--prod--temgamma
-  accessModes:
-    - "ReadWriteMany"
-  resources:
-    requests:
-      storage: 1Gi
----
-kind: PersistentVolumeClaim
-apiVersion: v1
-metadata:
-  name: cryoem-daq--prod--temgamma-gainrefs
-spec:
-  storageClassName: cryoem-daq--prod--temgamma-gainrefs
-  accessModes:
-    - "ReadWriteMany"
-  resources:
-    requests:
-      storage: 1Gi
+      storage: 20Gi
 
