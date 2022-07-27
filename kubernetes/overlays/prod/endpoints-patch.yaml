@@ -4,7 +4,7 @@ metadata:
   name: postgres
   namespace: cryoem-daq
   annotations:
-    metallb.universe.tf/address-pool: cryoem-daq-dev
+    metallb.universe.tf/address-pool: cryoem-daq
 spec:
   type: LoadBalancer
   internalTrafficPolicy: Cluster
@@ -14,4 +14,4 @@ spec:
     protocol: TCP
     targetPort: 5432
   selector:
-    cnpg.io/poolerName: cryoem-daq--dev-pooler-rw
+    cnpg.io/poolerName: cryoem-daq-pooler-rw
